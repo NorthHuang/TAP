@@ -57,7 +57,7 @@ avatar = None
 
 #####webrtc###############################
 pcs = set()
-
+print("lalala")
 def randN(N)->int:
     '''生成长度为 N的随机数 '''
     min = pow(10, N - 1)
