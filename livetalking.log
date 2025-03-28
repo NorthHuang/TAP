@@ -1,0 +1,608 @@
+2025-03-24 08:07:50,502 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtc', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 08:07:50,946 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 08:07:51,133 - logger - INFO - reading images...
+2025-03-24 08:07:57,337 - logger - INFO - reading images...
+2025-03-24 08:07:58,298 - logger - INFO - warmup model...
+2025-03-24 08:08:02,509 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 10:14:27,152 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtc', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 10:14:27,597 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 10:14:27,785 - logger - INFO - reading images...
+2025-03-24 10:14:33,977 - logger - INFO - reading images...
+2025-03-24 10:14:34,936 - logger - INFO - warmup model...
+2025-03-24 10:14:39,156 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 10:32:52,079 - logger - INFO - sessionid=203118
+2025-03-24 10:32:53,308 - logger - INFO - Connection state is connecting
+2025-03-24 10:32:54,293 - logger - INFO - Connection state is connected
+2025-03-24 10:32:54,294 - logger - INFO - start inference
+2025-03-24 10:32:55,357 - logger - INFO - ttsreal thread stop
+2025-03-24 10:32:55,357 - logger - INFO - lipreal process_frames thread stop
+2025-03-24 10:32:55,358 - logger - INFO - lipreal inference processor stop
+2025-03-24 10:33:10,671 - logger - INFO - lipreal thread stop
+2025-03-24 10:33:10,672 - logger - INFO - Connection state is closed
+2025-03-24 10:33:29,572 - logger - INFO - sessionid=838416
+2025-03-24 10:33:30,788 - logger - INFO - Connection state is connecting
+2025-03-24 10:33:31,779 - logger - INFO - Connection state is connected
+2025-03-24 10:33:31,780 - logger - INFO - start inference
+2025-03-24 10:33:32,112 - logger - INFO - video start:1742812412.112468
+2025-03-24 10:33:32,113 - logger - INFO - audio start:1742812412.113811
+2025-03-24 10:33:36,073 - logger - INFO - ------actual avg final fps:15.8857
+2025-03-24 10:33:38,208 - logger - INFO - -------edge tts time:0.5078s
+2025-03-24 10:33:38,209 - logger - INFO - [INFO]tts audio stream 24000: (35136,)
+2025-03-24 10:33:38,210 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:33:43,170 - logger - INFO - notify:{'status': 'start', 'text': '你好', 'msgenvent': None}
+2025-03-24 10:33:47,590 - logger - INFO - ------actual avg final fps:8.6827
+2025-03-24 10:33:56,057 - logger - INFO - notify:{'status': 'end', 'text': '你好', 'msgenvent': None}
+2025-03-24 10:33:56,667 - logger - INFO - -------edge tts time:0.3819s
+2025-03-24 10:33:56,668 - logger - INFO - [INFO]tts audio stream 24000: (40320,)
+2025-03-24 10:33:56,669 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:33:56,821 - logger - INFO - ------actual avg final fps:10.8331
+2025-03-24 10:34:01,854 - logger - INFO - notify:{'status': 'start', 'text': '你是谁', 'msgenvent': None}
+2025-03-24 10:34:10,432 - logger - INFO - ------actual avg infer fps:3.6932
+2025-03-24 10:34:10,573 - logger - INFO - notify:{'status': 'end', 'text': '你是谁', 'msgenvent': None}
+2025-03-24 10:34:11,158 - logger - INFO - ------actual avg final fps:6.9751
+2025-03-24 10:34:14,011 - logger - INFO - ------actual avg final fps:35.0487
+2025-03-24 10:34:16,047 - logger - INFO - ------actual avg final fps:49.1121
+2025-03-24 10:34:18,115 - logger - INFO - ------actual avg final fps:48.3733
+2025-03-24 10:34:20,124 - logger - INFO - ------actual avg final fps:49.7823
+2025-03-24 10:34:22,275 - logger - INFO - ------actual avg final fps:46.4743
+2025-03-24 10:34:24,338 - logger - INFO - ------actual avg final fps:48.4833
+2025-03-24 10:34:26,405 - logger - INFO - ------actual avg final fps:48.3960
+2025-03-24 10:34:28,427 - logger - INFO - ------actual avg final fps:49.4426
+2025-03-24 10:34:30,569 - logger - INFO - ------actual avg final fps:46.6864
+2025-03-24 10:34:32,622 - logger - INFO - ------actual avg final fps:48.7252
+2025-03-24 10:34:33,359 - logger - INFO - -------edge tts time:0.5932s
+2025-03-24 10:34:33,364 - logger - INFO - [INFO]tts audio stream 24000: (89280,)
+2025-03-24 10:34:33,364 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:34:37,870 - logger - INFO - notify:{'status': 'start', 'text': '你好，你是谁，你可以说话吗', 'msgenvent': None}
+2025-03-24 10:34:46,724 - logger - INFO - ------actual avg final fps:7.0910
+2025-03-24 10:34:59,694 - logger - INFO - notify:{'status': 'end', 'text': '你好，你是谁，你可以说话吗', 'msgenvent': None}
+2025-03-24 10:35:00,343 - logger - INFO - ------actual avg final fps:7.3427
+2025-03-24 10:35:03,178 - logger - INFO - ------actual avg final fps:35.2796
+2025-03-24 10:35:05,211 - logger - INFO - ------actual avg final fps:49.1855
+2025-03-24 10:35:07,269 - logger - INFO - ------actual avg final fps:48.5947
+2025-03-24 10:35:09,255 - logger - INFO - ------actual avg final fps:50.3596
+2025-03-24 10:35:11,430 - logger - INFO - ------actual avg final fps:45.9835
+2025-03-24 10:35:13,499 - logger - INFO - ------actual avg final fps:48.3134
+2025-03-24 10:35:15,556 - logger - INFO - ------actual avg final fps:48.6350
+2025-03-24 10:35:17,577 - logger - INFO - ------actual avg final fps:49.4757
+2025-03-24 10:35:19,702 - logger - INFO - ------actual avg final fps:47.0528
+2025-03-24 10:35:21,728 - logger - INFO - ------actual avg final fps:49.3609
+2025-03-24 10:35:23,781 - logger - INFO - ------actual avg final fps:48.7135
+2025-03-24 10:35:25,837 - logger - INFO - ------actual avg final fps:48.6446
+2025-03-24 10:35:28,073 - logger - INFO - ------actual avg final fps:44.7200
+2025-03-24 10:35:32,074 - logger - INFO - ------actual avg final fps:24.9957
+2025-03-24 10:35:36,074 - logger - INFO - ------actual avg final fps:25.0014
+2025-03-24 10:35:40,074 - logger - INFO - ------actual avg final fps:25.0035
+2025-03-24 10:35:44,074 - logger - INFO - ------actual avg final fps:25.0000
+2025-03-24 10:35:47,011 - logger - INFO - lipreal thread stop
+2025-03-24 10:35:47,012 - logger - INFO - Connection state is closed
+2025-03-24 10:35:47,445 - logger - INFO - ttsreal thread stop
+2025-03-24 10:35:47,725 - logger - INFO - lipreal inference processor stop
+2025-03-24 10:35:47,747 - logger - INFO - lipreal process_frames thread stop
+2025-03-24 10:35:54,620 - logger - INFO - sessionid=641360
+2025-03-24 10:35:55,836 - logger - INFO - Connection state is connecting
+2025-03-24 10:35:56,760 - logger - INFO - Connection state is connected
+2025-03-24 10:35:56,761 - logger - INFO - start inference
+2025-03-24 10:35:57,092 - logger - INFO - video start:1742812557.092061
+2025-03-24 10:35:57,117 - logger - INFO - audio start:1742812557.117910
+2025-03-24 10:36:01,052 - logger - INFO - ------actual avg final fps:16.0587
+2025-03-24 10:36:05,053 - logger - INFO - ------actual avg final fps:24.9977
+2025-03-24 10:36:09,053 - logger - INFO - ------actual avg final fps:24.9998
+2025-03-24 10:36:13,052 - logger - INFO - ------actual avg final fps:25.0034
+2025-03-24 10:36:17,052 - logger - INFO - ------actual avg final fps:25.0000
+2025-03-24 10:36:21,054 - logger - INFO - ------actual avg final fps:24.9933
+2025-03-24 10:36:25,053 - logger - INFO - ------actual avg final fps:25.0014
+2025-03-24 10:36:28,378 - logger - INFO - -------edge tts time:0.6724s
+2025-03-24 10:36:28,382 - logger - INFO - [INFO]tts audio stream 24000: (95616,)
+2025-03-24 10:36:28,382 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:36:29,053 - logger - INFO - ------actual avg final fps:25.0064
+2025-03-24 10:36:32,961 - logger - INFO - notify:{'status': 'start', 'text': '你好，请问你可以说话吗，你是谁', 'msgenvent': None}
+2025-03-24 10:36:58,924 - logger - INFO - ------actual avg infer fps:3.6780
+2025-03-24 10:36:59,043 - logger - INFO - ------actual avg final fps:3.3344
+2025-03-24 10:36:59,081 - logger - INFO - notify:{'status': 'end', 'text': '你好，请问你可以说话吗，你是谁', 'msgenvent': None}
+2025-03-24 10:37:01,454 - logger - INFO - ------actual avg final fps:41.4687
+2025-03-24 10:37:03,511 - logger - INFO - ------actual avg final fps:48.6283
+2025-03-24 10:37:05,522 - logger - INFO - ------actual avg final fps:49.7140
+2025-03-24 10:37:07,657 - logger - INFO - ------actual avg final fps:46.8453
+2025-03-24 10:37:09,714 - logger - INFO - ------actual avg final fps:48.6178
+2025-03-24 10:37:11,765 - logger - INFO - ------actual avg final fps:48.7675
+2025-03-24 10:37:13,779 - logger - INFO - ------actual avg final fps:49.6526
+2025-03-24 10:37:15,932 - logger - INFO - ------actual avg final fps:46.4474
+2025-03-24 10:37:17,973 - logger - INFO - ------actual avg final fps:48.9897
+2025-03-24 10:37:20,016 - logger - INFO - ------actual avg final fps:48.9576
+2025-03-24 10:37:22,053 - logger - INFO - ------actual avg final fps:49.0956
+2025-03-24 10:37:24,207 - logger - INFO - ------actual avg final fps:46.4277
+2025-03-24 10:37:26,277 - logger - INFO - ------actual avg final fps:48.2966
+2025-03-24 10:37:29,052 - logger - INFO - ------actual avg final fps:36.0442
+2025-03-24 10:37:33,052 - logger - INFO - ------actual avg final fps:24.9988
+2025-03-24 10:37:37,052 - logger - INFO - ------actual avg final fps:25.0003
+2025-03-24 10:37:41,053 - logger - INFO - ------actual avg final fps:24.9975
+2025-03-24 10:37:50,836 - logger - INFO - lipreal(203118) delete
+2025-03-24 10:37:50,837 - logger - INFO - lipreal(838416) delete
+2025-03-24 10:38:36,894 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=25, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtc', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 10:38:37,337 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 10:38:37,514 - logger - INFO - reading images...
+2025-03-24 10:38:43,717 - logger - INFO - reading images...
+2025-03-24 10:38:44,682 - logger - INFO - warmup model...
+2025-03-24 10:38:48,876 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 10:39:04,401 - logger - INFO - sessionid=215084
+2025-03-24 10:39:05,629 - logger - INFO - Connection state is connecting
+2025-03-24 10:39:06,500 - logger - INFO - Connection state is connected
+2025-03-24 10:39:06,501 - logger - INFO - start inference
+2025-03-24 10:39:07,596 - logger - INFO - video start:1742812747.596066
+2025-03-24 10:39:07,597 - logger - INFO - audio start:1742812747.597293
+2025-03-24 10:39:11,556 - logger - INFO - ------actual avg final fps:14.3961
+2025-03-24 10:39:15,557 - logger - INFO - ------actual avg final fps:24.9968
+2025-03-24 10:39:19,557 - logger - INFO - ------actual avg final fps:24.9995
+2025-03-24 10:39:23,556 - logger - INFO - ------actual avg final fps:25.0099
+2025-03-24 10:39:24,800 - logger - INFO - -------edge tts time:0.6380s
+2025-03-24 10:39:24,808 - logger - INFO - [INFO]tts audio stream 24000: (153792,)
+2025-03-24 10:39:24,808 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:39:29,918 - logger - INFO - notify:{'status': 'start', 'text': '你好，你可以说话吗，请说几句让我看看你的口型能不能对上', 'msgenvent': None}
+2025-03-24 10:39:38,504 - logger - INFO - ------actual avg final fps:6.6901
+2025-03-24 10:39:51,513 - logger - INFO - notify:{'status': 'end', 'text': '你好，你可以说话吗，请说几句让我看看你的口型能不能对上', 'msgenvent': None}
+2025-03-24 10:39:52,192 - logger - INFO - ------actual avg final fps:7.3054
+2025-03-24 10:39:54,969 - logger - INFO - ------actual avg final fps:36.0211
+2025-03-24 10:39:57,000 - logger - INFO - ------actual avg final fps:49.2237
+2025-03-24 10:39:59,127 - logger - INFO - ------actual avg final fps:47.0233
+2025-03-24 10:40:01,211 - logger - INFO - ------actual avg final fps:47.9820
+2025-03-24 10:40:03,263 - logger - INFO - ------actual avg final fps:48.7522
+2025-03-24 10:40:05,294 - logger - INFO - ------actual avg final fps:49.2257
+2025-03-24 10:40:07,435 - logger - INFO - ------actual avg final fps:46.7187
+2025-03-24 10:40:09,487 - logger - INFO - ------actual avg final fps:48.7277
+2025-03-24 10:40:11,529 - logger - INFO - ------actual avg final fps:48.9735
+2025-03-24 10:40:13,579 - logger - INFO - ------actual avg final fps:48.7918
+2025-03-24 10:40:15,697 - logger - INFO - ------actual avg final fps:47.2148
+2025-03-24 10:40:19,557 - logger - INFO - ------actual avg final fps:25.9116
+2025-03-24 10:40:23,557 - logger - INFO - ------actual avg final fps:24.9981
+2025-03-24 10:40:27,557 - logger - INFO - ------actual avg final fps:25.0028
+2025-03-24 10:40:31,556 - logger - INFO - ------actual avg final fps:25.0086
+2025-03-24 10:40:35,557 - logger - INFO - ------actual avg final fps:24.9949
+2025-03-24 10:40:39,556 - logger - INFO - ------actual avg final fps:25.0042
+2025-03-24 10:40:43,556 - logger - INFO - ------actual avg final fps:25.0041
+2025-03-24 10:40:47,557 - logger - INFO - ------actual avg final fps:24.9906
+2025-03-24 10:40:51,557 - logger - INFO - ------actual avg final fps:25.0021
+2025-03-24 10:40:55,557 - logger - INFO - ------actual avg final fps:25.0002
+2025-03-24 10:40:59,558 - logger - INFO - ------actual avg final fps:25.0005
+2025-03-24 10:41:03,557 - logger - INFO - ------actual avg final fps:25.0041
+2025-03-24 10:41:16,368 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtc', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 10:41:16,812 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 10:41:16,989 - logger - INFO - reading images...
+2025-03-24 10:41:23,184 - logger - INFO - reading images...
+2025-03-24 10:41:24,141 - logger - INFO - warmup model...
+2025-03-24 10:41:28,347 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 10:41:55,241 - logger - INFO - sessionid=143716
+2025-03-24 10:41:56,462 - logger - INFO - Connection state is connecting
+2025-03-24 10:41:57,427 - logger - INFO - Connection state is connected
+2025-03-24 10:41:57,428 - logger - INFO - start inference
+2025-03-24 10:41:58,522 - logger - INFO - video start:1742812918.522603
+2025-03-24 10:41:58,523 - logger - INFO - audio start:1742812918.523580
+2025-03-24 10:42:02,483 - logger - INFO - ------actual avg final fps:14.2193
+2025-03-24 10:42:06,483 - logger - INFO - ------actual avg final fps:25.0019
+2025-03-24 10:42:07,193 - logger - INFO - -------edge tts time:0.3926s
+2025-03-24 10:42:07,196 - logger - INFO - [INFO]tts audio stream 24000: (74880,)
+2025-03-24 10:42:07,196 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:42:12,440 - logger - INFO - notify:{'status': 'start', 'text': '你好，请问你可以说话吗', 'msgenvent': None}
+2025-03-24 10:42:21,208 - logger - INFO - ------actual avg final fps:6.7911
+2025-03-24 10:42:29,676 - logger - INFO - notify:{'status': 'end', 'text': '你好，请问你可以说话吗', 'msgenvent': None}
+2025-03-24 10:42:30,404 - logger - INFO - ------actual avg final fps:10.8742
+2025-03-24 10:42:33,444 - logger - INFO - ------actual avg final fps:32.8977
+2025-03-24 10:42:35,507 - logger - INFO - ------actual avg final fps:48.4642
+2025-03-24 10:42:37,582 - logger - INFO - ------actual avg final fps:48.2052
+2025-03-24 10:42:39,584 - logger - INFO - ------actual avg final fps:49.9577
+2025-03-24 10:42:41,733 - logger - INFO - ------actual avg final fps:46.5340
+2025-03-24 10:42:43,791 - logger - INFO - ------actual avg final fps:48.5789
+2025-03-24 10:42:45,841 - logger - INFO - ------actual avg final fps:48.7979
+2025-03-24 10:42:47,869 - logger - INFO - ------actual avg final fps:49.2983
+2025-03-24 10:42:50,484 - logger - INFO - ------actual avg final fps:38.2538
+2025-03-24 10:42:54,484 - logger - INFO - ------actual avg final fps:25.0007
+2025-03-24 10:42:58,483 - logger - INFO - ------actual avg final fps:25.0021
+2025-03-24 10:43:02,484 - logger - INFO - ------actual avg final fps:24.9987
+2025-03-24 10:43:06,483 - logger - INFO - ------actual avg final fps:25.0036
+2025-03-24 10:43:10,482 - logger - INFO - ------actual avg final fps:25.0061
+2025-03-24 10:43:14,484 - logger - INFO - ------actual avg final fps:24.9896
+2025-03-24 10:43:18,483 - logger - INFO - ------actual avg final fps:25.0052
+2025-03-24 10:43:22,483 - logger - INFO - ------actual avg final fps:25.0035
+2025-03-24 10:43:26,483 - logger - INFO - ------actual avg final fps:25.0029
+2025-03-24 10:43:30,483 - logger - INFO - ------actual avg final fps:24.9977
+2025-03-24 10:43:34,484 - logger - INFO - ------actual avg final fps:24.9967
+2025-03-24 10:43:38,483 - logger - INFO - ------actual avg final fps:25.0031
+2025-03-24 10:43:42,484 - logger - INFO - ------actual avg final fps:24.9979
+2025-03-24 10:43:46,484 - logger - INFO - ------actual avg final fps:25.0015
+2025-03-24 10:43:50,483 - logger - INFO - ------actual avg final fps:25.0016
+2025-03-24 10:43:54,483 - logger - INFO - ------actual avg final fps:25.0021
+2025-03-24 10:43:58,483 - logger - INFO - ------actual avg final fps:25.0049
+2025-03-24 10:44:02,483 - logger - INFO - ------actual avg final fps:24.9977
+2025-03-24 10:44:06,483 - logger - INFO - ------actual avg final fps:25.0028
+2025-03-24 10:44:10,483 - logger - INFO - ------actual avg final fps:24.9973
+2025-03-24 10:44:14,484 - logger - INFO - ------actual avg final fps:24.9984
+2025-03-24 10:44:18,483 - logger - INFO - ------actual avg final fps:25.0032
+2025-03-24 10:44:22,483 - logger - INFO - ------actual avg final fps:25.0015
+2025-03-24 10:44:26,484 - logger - INFO - ------actual avg final fps:24.9960
+2025-03-24 10:44:30,484 - logger - INFO - ------actual avg final fps:25.0020
+2025-03-24 10:44:34,483 - logger - INFO - ------actual avg final fps:25.0036
+2025-03-24 10:44:38,484 - logger - INFO - ------actual avg final fps:24.9984
+2025-03-24 10:44:42,143 - logger - INFO - -------edge tts time:1.1349s
+2025-03-24 10:44:42,147 - logger - INFO - [INFO]tts audio stream 24000: (138816,)
+2025-03-24 10:44:42,148 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:44:42,483 - logger - INFO - ------actual avg final fps:25.0039
+2025-03-24 10:44:46,774 - logger - INFO - notify:{'status': 'start', 'text': '你现在应该只是把奥巴马的那个demo跑出来吧，声音咋会卡', 'msgenvent': None}
+2025-03-24 10:44:51,053 - logger - INFO - ------actual avg infer fps:3.6980
+2025-03-24 10:45:08,358 - logger - INFO - ------actual avg final fps:3.8648
+2025-03-24 10:45:21,271 - logger - INFO - ------actual avg infer fps:3.7113
+2025-03-24 10:45:25,648 - logger - INFO - notify:{'status': 'end', 'text': '你现在应该只是把奥巴马的那个demo跑出来吧，声音咋会卡', 'msgenvent': None}
+2025-03-24 10:45:26,313 - logger - INFO - ------actual avg final fps:5.5693
+2025-03-24 10:45:28,969 - logger - INFO - ------actual avg final fps:37.6611
+2025-03-24 10:45:31,104 - logger - INFO - ------actual avg final fps:46.8432
+2025-03-24 10:45:33,157 - logger - INFO - ------actual avg final fps:48.6964
+2025-03-24 10:45:35,220 - logger - INFO - ------actual avg final fps:48.4739
+2025-03-24 10:45:37,238 - logger - INFO - ------actual avg final fps:49.5688
+2025-03-24 10:45:39,365 - logger - INFO - ------actual avg final fps:47.0033
+2025-03-24 10:45:41,430 - logger - INFO - ------actual avg final fps:48.4442
+2025-03-24 10:45:43,469 - logger - INFO - ------actual avg final fps:49.0306
+2025-03-24 10:45:45,508 - logger - INFO - ------actual avg final fps:49.0629
+2025-03-24 10:45:47,633 - logger - INFO - ------actual avg final fps:47.0523
+2025-03-24 10:45:49,672 - logger - INFO - ------actual avg final fps:49.0449
+2025-03-24 10:45:51,704 - logger - INFO - ------actual avg final fps:49.2137
+2025-03-24 10:45:53,751 - logger - INFO - ------actual avg final fps:48.8446
+2025-03-24 10:45:55,873 - logger - INFO - ------actual avg final fps:47.1382
+2025-03-24 10:45:57,908 - logger - INFO - ------actual avg final fps:49.1289
+2025-03-24 10:45:59,964 - logger - INFO - ------actual avg final fps:48.6542
+2025-03-24 10:46:01,980 - logger - INFO - ------actual avg final fps:49.5965
+2025-03-24 10:46:04,134 - logger - INFO - ------actual avg final fps:46.4372
+2025-03-24 10:46:06,483 - logger - INFO - ------actual avg final fps:42.5656
+2025-03-24 10:46:10,484 - logger - INFO - ------actual avg final fps:24.9970
+2025-03-24 10:46:14,483 - logger - INFO - ------actual avg final fps:25.0041
+2025-03-24 10:46:18,483 - logger - INFO - ------actual avg final fps:25.0007
+2025-03-24 10:46:22,482 - logger - INFO - ------actual avg final fps:25.0056
+2025-03-24 10:46:26,483 - logger - INFO - ------actual avg final fps:24.9970
+2025-03-24 10:46:30,483 - logger - INFO - ------actual avg final fps:24.9985
+2025-03-24 10:46:34,484 - logger - INFO - ------actual avg final fps:24.9982
+2025-03-24 10:46:38,484 - logger - INFO - ------actual avg final fps:24.9997
+2025-03-24 10:46:42,483 - logger - INFO - ------actual avg final fps:25.0069
+2025-03-24 10:46:46,483 - logger - INFO - ------actual avg final fps:24.9994
+2025-03-24 10:46:50,483 - logger - INFO - ------actual avg final fps:25.0041
+2025-03-24 10:46:54,483 - logger - INFO - ------actual avg final fps:24.9992
+2025-03-24 10:46:58,484 - logger - INFO - ------actual avg final fps:24.9931
+2025-03-24 10:47:02,483 - logger - INFO - ------actual avg final fps:25.0089
+2025-03-24 10:47:06,483 - logger - INFO - ------actual avg final fps:24.9993
+2025-03-24 10:47:10,484 - logger - INFO - ------actual avg final fps:24.9948
+2025-03-24 10:47:14,483 - logger - INFO - ------actual avg final fps:25.0031
+2025-03-24 10:47:32,818 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=25, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtc', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 10:47:33,261 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 10:47:33,439 - logger - INFO - reading images...
+2025-03-24 10:47:39,626 - logger - INFO - reading images...
+2025-03-24 10:47:40,583 - logger - INFO - warmup model...
+2025-03-24 10:47:44,812 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 10:48:23,511 - logger - INFO - sessionid=439991
+2025-03-24 10:48:24,740 - logger - INFO - Connection state is connecting
+2025-03-24 10:48:25,602 - logger - INFO - Connection state is connected
+2025-03-24 10:48:25,604 - logger - INFO - start inference
+2025-03-24 10:48:26,712 - logger - INFO - video start:1742813306.712776
+2025-03-24 10:48:26,714 - logger - INFO - audio start:1742813306.714959
+2025-03-24 10:48:30,673 - logger - INFO - ------actual avg final fps:14.3825
+2025-03-24 10:48:34,673 - logger - INFO - ------actual avg final fps:25.0001
+2025-03-24 10:48:38,673 - logger - INFO - ------actual avg final fps:25.0014
+2025-03-24 10:48:42,673 - logger - INFO - ------actual avg final fps:25.0006
+2025-03-24 10:48:46,673 - logger - INFO - ------actual avg final fps:25.0034
+2025-03-24 10:48:49,301 - logger - INFO - -------edge tts time:2.2072s
+2025-03-24 10:48:49,330 - logger - INFO - [INFO]tts audio stream 24000: (138816,)
+2025-03-24 10:48:49,331 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:48:50,673 - logger - INFO - ------actual avg final fps:25.0018
+2025-03-24 10:48:54,773 - logger - INFO - notify:{'status': 'start', 'text': '你现在应该只是把奥巴马的那个demo跑出来吧，声音咋会卡', 'msgenvent': None}
+2025-03-24 10:49:12,222 - logger - INFO - notify:{'status': 'end', 'text': '你现在应该只是把奥巴马的那个demo跑出来吧，声音咋会卡', 'msgenvent': None}
+2025-03-24 10:49:12,534 - logger - INFO - ------actual avg final fps:4.5744
+2025-03-24 10:49:14,979 - logger - INFO - ------actual avg final fps:40.8960
+2025-03-24 10:49:17,112 - logger - INFO - ------actual avg final fps:46.8754
+2025-03-24 10:49:19,171 - logger - INFO - ------actual avg final fps:48.5662
+2025-03-24 10:49:21,253 - logger - INFO - ------actual avg final fps:48.0467
+2025-03-24 10:49:23,304 - logger - INFO - ------actual avg final fps:48.7615
+2025-03-24 10:49:25,451 - logger - INFO - ------actual avg final fps:46.5735
+2025-03-24 10:49:27,492 - logger - INFO - ------actual avg final fps:48.9969
+2025-03-24 10:49:29,543 - logger - INFO - ------actual avg final fps:48.7661
+2025-03-24 10:49:31,580 - logger - INFO - ------actual avg final fps:49.0916
+2025-03-24 10:49:34,673 - logger - INFO - ------actual avg final fps:32.3295
+2025-03-24 10:49:38,673 - logger - INFO - ------actual avg final fps:24.9998
+2025-03-24 10:49:42,672 - logger - INFO - ------actual avg final fps:25.0049
+2025-03-24 10:49:46,673 - logger - INFO - ------actual avg final fps:24.9957
+2025-03-24 10:49:50,673 - logger - INFO - ------actual avg final fps:25.0009
+2025-03-24 10:49:54,673 - logger - INFO - ------actual avg final fps:25.0026
+2025-03-24 10:49:58,673 - logger - INFO - ------actual avg final fps:25.0026
+2025-03-24 10:50:02,673 - logger - INFO - ------actual avg final fps:24.9988
+2025-03-24 10:50:06,673 - logger - INFO - ------actual avg final fps:24.9988
+2025-03-24 10:50:10,673 - logger - INFO - ------actual avg final fps:25.0004
+2025-03-24 10:50:14,673 - logger - INFO - ------actual avg final fps:25.0046
+2025-03-24 10:50:18,673 - logger - INFO - ------actual avg final fps:25.0010
+2025-03-24 10:50:22,673 - logger - INFO - ------actual avg final fps:24.9993
+2025-03-24 10:50:26,673 - logger - INFO - ------actual avg final fps:24.9975
+2025-03-24 10:50:30,673 - logger - INFO - ------actual avg final fps:25.0045
+2025-03-24 10:50:34,672 - logger - INFO - ------actual avg final fps:25.0019
+2025-03-24 10:50:38,673 - logger - INFO - ------actual avg final fps:24.9972
+2025-03-24 10:50:42,673 - logger - INFO - ------actual avg final fps:25.0018
+2025-03-24 10:50:46,673 - logger - INFO - ------actual avg final fps:24.9997
+2025-03-24 10:50:50,673 - logger - INFO - ------actual avg final fps:24.9995
+2025-03-24 10:50:54,672 - logger - INFO - ------actual avg final fps:25.0052
+2025-03-24 10:50:58,673 - logger - INFO - ------actual avg final fps:24.9990
+2025-03-24 10:51:02,673 - logger - INFO - ------actual avg final fps:24.9999
+2025-03-24 10:51:06,673 - logger - INFO - ------actual avg final fps:25.0020
+2025-03-24 10:51:10,673 - logger - INFO - ------actual avg final fps:24.9984
+2025-03-24 10:51:14,673 - logger - INFO - ------actual avg final fps:25.0022
+2025-03-24 10:51:18,673 - logger - INFO - ------actual avg final fps:25.0017
+2025-03-24 10:51:22,673 - logger - INFO - ------actual avg final fps:24.9996
+2025-03-24 10:51:26,673 - logger - INFO - ------actual avg final fps:24.9990
+2025-03-24 10:51:30,673 - logger - INFO - ------actual avg final fps:25.0027
+2025-03-24 10:51:34,674 - logger - INFO - ------actual avg final fps:24.9923
+2025-03-24 10:52:08,733 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=25, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=128, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtc', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 10:52:09,177 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 10:52:09,358 - logger - INFO - reading images...
+2025-03-24 10:52:15,551 - logger - INFO - reading images...
+2025-03-24 10:52:16,510 - logger - INFO - warmup model...
+2025-03-24 10:52:50,784 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 10:53:52,637 - logger - INFO - sessionid=601991
+2025-03-24 10:53:53,875 - logger - INFO - Connection state is connecting
+2025-03-24 10:53:54,765 - logger - INFO - Connection state is connected
+2025-03-24 10:53:54,766 - logger - INFO - start inference
+2025-03-24 10:53:58,156 - logger - INFO - video start:1742813638.156852
+2025-03-24 10:53:58,157 - logger - INFO - audio start:1742813638.157918
+2025-03-24 10:54:02,118 - logger - INFO - ------actual avg final fps:10.7877
+2025-03-24 10:54:06,118 - logger - INFO - ------actual avg final fps:25.0030
+2025-03-24 10:54:10,117 - logger - INFO - ------actual avg final fps:25.0058
+2025-03-24 10:54:10,407 - logger - INFO - -------edge tts time:0.6734s
+2025-03-24 10:54:10,529 - logger - INFO - [INFO]tts audio stream 24000: (93888,)
+2025-03-24 10:54:10,530 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 10:54:14,118 - logger - INFO - ------actual avg final fps:24.9938
+2025-03-24 10:54:18,118 - logger - INFO - ------actual avg final fps:24.9990
+2025-03-24 10:54:49,039 - logger - INFO - ------actual avg infer fps:3.7071
+2025-03-24 10:54:49,121 - logger - INFO - notify:{'status': 'start', 'text': '这么快已经用上了它这个垃圾模型', 'msgenvent': None}
+2025-03-24 10:54:49,926 - logger - INFO - notify:{'status': 'end', 'text': '这么快已经用上了它这个垃圾模型', 'msgenvent': None}
+2025-03-24 10:54:50,445 - logger - INFO - ------actual avg final fps:3.0934
+2025-03-24 10:54:51,484 - logger - INFO - ------actual avg final fps:96.2305
+2025-03-24 10:54:52,635 - logger - INFO - ------actual avg final fps:86.8574
+2025-03-24 10:54:53,616 - logger - INFO - ------actual avg final fps:102.0045
+2025-03-24 10:54:54,617 - logger - INFO - ------actual avg final fps:99.9269
+2025-03-24 10:54:55,645 - logger - INFO - ------actual avg final fps:97.2140
+2025-03-24 12:30:40,982 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='avator_1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtcls', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 12:30:41,427 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 12:30:42,180 - logger - INFO - reading images...
+2025-03-24 12:30:56,195 - logger - INFO - reading images...
+2025-03-24 12:30:56,196 - logger - INFO - warmup model...
+2025-03-24 12:31:00,507 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 12:31:18,136 - logger - INFO - sessionid=383069
+2025-03-24 12:31:19,362 - logger - INFO - Connection state is connecting
+2025-03-24 12:31:20,386 - logger - INFO - Connection state is connected
+2025-03-24 12:31:20,387 - logger - INFO - start inference
+2025-03-24 12:31:43,390 - logger - INFO - ttsreal thread stop
+2025-03-24 12:31:43,390 - logger - INFO - lipreal process_frames thread stop
+2025-03-24 12:32:13,800 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='avator_1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtcls', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 12:32:14,243 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 12:32:14,531 - logger - INFO - reading images...
+2025-03-24 12:32:26,910 - logger - INFO - reading images...
+2025-03-24 12:32:26,910 - logger - INFO - warmup model...
+2025-03-24 12:32:31,182 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 12:32:48,795 - logger - INFO - sessionid=765332
+2025-03-24 12:32:50,018 - logger - INFO - Connection state is connecting
+2025-03-24 12:32:50,903 - logger - INFO - Connection state is connected
+2025-03-24 12:32:50,904 - logger - INFO - start inference
+2025-03-24 12:33:54,914 - logger - INFO - ttsreal thread stop
+2025-03-24 12:33:54,914 - logger - INFO - lipreal process_frames thread stop
+2025-03-24 12:39:09,278 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='avator_1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtcls', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 12:39:09,723 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 12:39:09,945 - logger - INFO - reading images...
+2025-03-24 12:39:22,351 - logger - INFO - reading images...
+2025-03-24 12:39:22,352 - logger - INFO - warmup model...
+2025-03-24 12:39:26,865 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 12:39:50,406 - logger - INFO - sessionid=294077
+2025-03-24 12:39:51,634 - logger - INFO - Connection state is connecting
+2025-03-24 12:39:52,498 - logger - INFO - Connection state is connected
+2025-03-24 12:39:52,499 - logger - INFO - start inference
+2025-03-24 12:41:06,609 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='avator_1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtcls', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 12:41:07,056 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 12:41:07,249 - logger - INFO - reading images...
+2025-03-24 12:41:19,643 - logger - INFO - reading images...
+2025-03-24 12:41:19,644 - logger - INFO - warmup model...
+2025-03-24 12:41:23,900 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 12:41:52,509 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtcls', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-24 12:41:52,959 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-24 12:41:53,152 - logger - INFO - reading images...
+2025-03-24 12:41:59,997 - logger - INFO - reading images...
+2025-03-24 12:42:01,403 - logger - INFO - warmup model...
+2025-03-24 12:42:05,660 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-24 12:42:12,276 - logger - INFO - sessionid=490655
+2025-03-24 12:42:13,500 - logger - INFO - Connection state is connecting
+2025-03-24 12:42:14,378 - logger - INFO - Connection state is connected
+2025-03-24 12:42:14,379 - logger - INFO - start inference
+2025-03-24 12:42:15,487 - logger - INFO - video start:1742820135.487270
+2025-03-24 12:42:15,488 - logger - INFO - audio start:1742820135.488387
+2025-03-24 12:42:19,168 - logger - INFO - -------edge tts time:0.4717s
+2025-03-24 12:42:19,170 - logger - INFO - [INFO]tts audio stream 24000: (38592,)
+2025-03-24 12:42:19,170 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 12:42:19,447 - logger - INFO - ------actual avg final fps:14.3647
+2025-03-24 12:42:24,567 - logger - INFO - notify:{'status': 'start', 'text': 'test', 'msgenvent': None}
+2025-03-24 12:42:33,289 - logger - INFO - notify:{'status': 'end', 'text': 'test', 'msgenvent': None}
+2025-03-24 12:42:33,624 - logger - INFO - ------actual avg final fps:7.0541
+2025-03-24 12:42:36,085 - logger - INFO - ------actual avg final fps:40.6265
+2025-03-24 12:42:38,117 - logger - INFO - ------actual avg final fps:49.2167
+2025-03-24 12:42:40,295 - logger - INFO - ------actual avg final fps:45.9329
+2025-03-24 12:42:42,354 - logger - INFO - ------actual avg final fps:48.5696
+2025-03-24 12:42:44,424 - logger - INFO - ------actual avg final fps:48.2989
+2025-03-24 12:42:47,449 - logger - INFO - ------actual avg final fps:33.0655
+2025-03-24 12:42:51,449 - logger - INFO - ------actual avg final fps:24.9998
+2025-03-24 12:42:52,533 - logger - INFO - -------edge tts time:0.4081s
+2025-03-24 12:42:52,535 - logger - INFO - [INFO]tts audio stream 24000: (50112,)
+2025-03-24 12:42:52,535 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-24 12:42:57,149 - logger - INFO - notify:{'status': 'start', 'text': '你可以说话吗', 'msgenvent': None}
+2025-03-24 12:43:10,227 - logger - INFO - ------actual avg infer fps:3.6262
+2025-03-24 12:43:10,390 - logger - INFO - notify:{'status': 'end', 'text': '你可以说话吗', 'msgenvent': None}
+2025-03-24 12:43:10,420 - logger - INFO - ------actual avg final fps:5.2713
+2025-03-24 12:43:12,849 - logger - INFO - ------actual avg final fps:41.1655
+2025-03-24 12:43:14,876 - logger - INFO - ------actual avg final fps:49.3550
+2025-03-24 12:43:17,022 - logger - INFO - ------actual avg final fps:46.5827
+2025-03-24 12:43:19,056 - logger - INFO - ------actual avg final fps:49.1707
+2025-03-24 12:43:21,082 - logger - INFO - ------actual avg final fps:49.3803
+2025-03-24 12:43:23,131 - logger - INFO - ------actual avg final fps:48.7889
+2025-03-24 12:43:25,254 - logger - INFO - ------actual avg final fps:47.1174
+2025-03-24 12:43:27,449 - logger - INFO - ------actual avg final fps:45.5644
+2025-03-24 12:43:31,448 - logger - INFO - ------actual avg final fps:25.0038
+2025-03-24 12:43:35,449 - logger - INFO - ------actual avg final fps:24.9992
+2025-03-24 12:43:39,449 - logger - INFO - ------actual avg final fps:25.0005
+2025-03-24 12:43:43,447 - logger - INFO - ------actual avg final fps:25.0110
+2025-03-24 12:43:47,448 - logger - INFO - ------actual avg final fps:24.9977
+2025-03-24 12:43:51,448 - logger - INFO - ------actual avg final fps:25.0000
+2025-03-24 12:43:55,447 - logger - INFO - ------actual avg final fps:25.0057
+2025-03-24 12:43:59,448 - logger - INFO - ------actual avg final fps:24.9929
+2025-03-25 09:31:56,936 - logger - INFO - Namespace(pose='data/data_kf.json', au='data/au.csv', torso_imgs='', O=False, data_range=[0, -1], workspace='data/video', seed=0, ckpt='data/pretrained/ngp_kf.pth', num_rays=65536, cuda_ray=False, max_steps=16, num_steps=16, upsample_steps=0, update_extra_interval=16, max_ray_batch=4096, warmup_step=10000, amb_aud_loss=1, amb_eye_loss=1, unc_loss=1, lambda_amb=0.0001, fp16=False, bg_img='white', fbg=False, exp_eye=False, fix_eye=-1, smooth_eye=False, torso_shrink=0.8, color_space='srgb', preload=0, bound=1, scale=4, offset=[0, 0, 0], dt_gamma=0.00390625, min_near=0.05, density_thresh=10, density_thresh_torso=0.01, patch_size=1, init_lips=False, finetune_lips=False, smooth_lips=False, torso=False, head_ckpt='', gui=False, W=450, H=450, radius=3.35, fovy=21.24, max_spp=1, att=2, aud='', emb=False, ind_dim=4, ind_num=10000, ind_dim_torso=8, amb_dim=2, part=False, part2=False, train_camera=False, smooth_path=False, smooth_path_window=7, asr=False, asr_wav='', asr_play=False, asr_model='cpierse/wav2vec2-large-xlsr-53-esperanto', asr_save_feats=False, fps=50, l=10, m=8, r=10, fullbody=False, fullbody_img='data/fullbody/img', fullbody_width=580, fullbody_height=1080, fullbody_offset_x=0, fullbody_offset_y=0, avatar_id='wav2lip256_avatar1', bbox_shift=5, batch_size=16, customvideo_config='', tts='edgetts', REF_FILE=None, REF_TEXT=None, TTS_SERVER='http://127.0.0.1:9880', model='wav2lip', transport='webrtcls', push_url='http://localhost:1985/rtc/v1/whip/?app=live&stream=livestream', max_session=1, listenport=8010, customopt=[])
+2025-03-25 09:31:57,421 - logger - INFO - Load checkpoint from: ./models/wav2lip.pth
+2025-03-25 09:31:58,224 - logger - INFO - reading images...
+2025-03-25 09:32:05,147 - logger - INFO - reading images...
+2025-03-25 09:32:06,667 - logger - INFO - warmup model...
+2025-03-25 09:32:11,063 - logger - INFO - start http server; http://<serverip>:8010/webrtcapi.html
+2025-03-25 09:34:06,506 - logger - INFO - sessionid=656255
+2025-03-25 09:34:07,748 - logger - INFO - Connection state is connecting
+2025-03-25 09:34:08,606 - logger - INFO - Connection state is connected
+2025-03-25 09:34:08,607 - logger - INFO - start inference
+2025-03-25 09:34:10,013 - logger - INFO - video start:1742895250.013678
+2025-03-25 09:34:10,033 - logger - INFO - audio start:1742895250.033854
+2025-03-25 09:34:13,975 - logger - INFO - ------actual avg final fps:13.8001
+2025-03-25 09:34:16,190 - logger - INFO - -------edge tts time:0.4481s
+2025-03-25 09:34:16,199 - logger - INFO - [INFO]tts audio stream 24000: (35136,)
+2025-03-25 09:34:16,199 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-25 09:34:21,611 - logger - INFO - notify:{'status': 'start', 'text': '你好', 'msgenvent': None}
+2025-03-25 09:34:21,726 - logger - INFO - ------actual avg final fps:12.9027
+2025-03-25 09:34:30,299 - logger - INFO - notify:{'status': 'end', 'text': '你好', 'msgenvent': None}
+2025-03-25 09:34:30,979 - logger - INFO - ------actual avg final fps:10.8070
+2025-03-25 09:34:33,825 - logger - INFO - ------actual avg final fps:35.1361
+2025-03-25 09:34:35,762 - logger - INFO - -------edge tts time:0.3723s
+2025-03-25 09:34:35,766 - logger - INFO - [INFO]tts audio stream 24000: (35136,)
+2025-03-25 09:34:35,766 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-25 09:34:40,210 - logger - INFO - ------actual avg final fps:15.6614
+2025-03-25 09:34:40,219 - logger - INFO - notify:{'status': 'start', 'text': '你好', 'msgenvent': None}
+2025-03-25 09:34:53,158 - logger - INFO - ------actual avg infer fps:3.6670
+2025-03-25 09:34:53,187 - logger - INFO - notify:{'status': 'end', 'text': '你好', 'msgenvent': None}
+2025-03-25 09:34:53,917 - logger - INFO - ------actual avg final fps:7.2960
+2025-03-25 09:34:56,641 - logger - INFO - ------actual avg final fps:36.7045
+2025-03-25 09:34:58,653 - logger - INFO - ------actual avg final fps:49.7026
+2025-03-25 09:35:00,805 - logger - INFO - ------actual avg final fps:46.4809
+2025-03-25 09:35:02,937 - logger - INFO - ------actual avg final fps:46.9024
+2025-03-25 09:35:04,968 - logger - INFO - ------actual avg final fps:49.2355
+2025-03-25 09:35:07,001 - logger - INFO - ------actual avg final fps:49.2017
+2025-03-25 09:35:09,153 - logger - INFO - ------actual avg final fps:46.4712
+2025-03-25 09:35:11,184 - logger - INFO - ------actual avg final fps:49.2413
+2025-03-25 09:35:13,246 - logger - INFO - ------actual avg final fps:48.4855
+2025-03-25 09:35:15,306 - logger - INFO - ------actual avg final fps:48.5383
+2025-03-25 09:35:17,974 - logger - INFO - ------actual avg final fps:37.4916
+2025-03-25 09:35:21,974 - logger - INFO - ------actual avg final fps:25.0025
+2025-03-25 09:35:25,452 - logger - INFO - -------edge tts time:0.4263s
+2025-03-25 09:35:25,456 - logger - INFO - [INFO]tts audio stream 24000: (66240,)
+2025-03-25 09:35:25,456 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-25 09:35:25,974 - logger - INFO - ------actual avg final fps:24.9975
+2025-03-25 09:35:30,029 - logger - INFO - notify:{'status': 'start', 'text': '你好，你是什么几把', 'msgenvent': None}
+2025-03-25 09:35:47,408 - logger - INFO - notify:{'status': 'end', 'text': '你好，你是什么几把', 'msgenvent': None}
+2025-03-25 09:35:47,797 - logger - INFO - ------actual avg final fps:4.5823
+2025-03-25 09:35:50,335 - logger - INFO - ------actual avg final fps:39.4000
+2025-03-25 09:35:52,402 - logger - INFO - ------actual avg final fps:48.3925
+2025-03-25 09:35:54,427 - logger - INFO - ------actual avg final fps:49.3848
+2025-03-25 09:35:56,448 - logger - INFO - ------actual avg final fps:49.4792
+2025-03-25 09:35:58,585 - logger - INFO - ------actual avg final fps:46.7910
+2025-03-25 09:36:00,641 - logger - INFO - ------actual avg final fps:48.6445
+2025-03-25 09:36:02,683 - logger - INFO - ------actual avg final fps:48.9680
+2025-03-25 09:36:04,723 - logger - INFO - ------actual avg final fps:49.0263
+2025-03-25 09:36:06,168 - logger - INFO - -------edge tts time:0.3426s
+2025-03-25 09:36:06,171 - logger - INFO - [INFO]tts audio stream 24000: (35136,)
+2025-03-25 09:36:06,172 - logger - INFO - [WARN] audio sample rate is 24000, resampling into 16000.
+2025-03-25 09:36:10,776 - logger - INFO - notify:{'status': 'start', 'text': '你好', 'msgenvent': None}
+2025-03-25 09:36:15,088 - logger - INFO - ------actual avg infer fps:3.6564
+2025-03-25 09:36:15,168 - logger - INFO - ------actual avg final fps:9.5738
+2025-03-25 09:36:19,618 - logger - INFO - notify:{'status': 'end', 'text': '你好', 'msgenvent': None}
+2025-03-25 09:36:21,697 - logger - INFO - ------actual avg final fps:15.3173
+2025-03-25 09:36:23,728 - logger - INFO - ------actual avg final fps:49.2484
+2025-03-25 09:36:25,778 - logger - INFO - ------actual avg final fps:48.7760
+2025-03-25 09:36:27,907 - logger - INFO - ------actual avg final fps:46.9797
+2025-03-25 09:36:29,963 - logger - INFO - ------actual avg final fps:48.6370
+2025-03-25 09:36:32,039 - logger - INFO - ------actual avg final fps:48.1671
+2025-03-25 09:36:34,064 - logger - INFO - ------actual avg final fps:49.3877
+2025-03-25 09:36:37,974 - logger - INFO - ------actual avg final fps:25.5780
+2025-03-25 09:36:41,974 - logger - INFO - ------actual avg final fps:24.9991
+2025-03-25 09:36:45,974 - logger - INFO - ------actual avg final fps:25.0000
+2025-03-25 09:36:49,974 - logger - INFO - ------actual avg final fps:25.0035
+2025-03-25 09:36:53,974 - logger - INFO - ------actual avg final fps:24.9996
+2025-03-25 09:36:57,974 - logger - INFO - ------actual avg final fps:25.0005
+2025-03-25 09:37:01,975 - logger - INFO - ------actual avg final fps:24.9940
+2025-03-25 09:37:05,974 - logger - INFO - ------actual avg final fps:25.0084
+2025-03-25 09:37:09,975 - logger - INFO - ------actual avg final fps:24.9938
+2025-03-25 09:37:13,974 - logger - INFO - ------actual avg final fps:25.0082
+2025-03-25 09:37:17,974 - logger - INFO - ------actual avg final fps:24.9998
+2025-03-25 09:37:21,974 - logger - INFO - ------actual avg final fps:25.0024
+2025-03-25 09:37:25,974 - logger - INFO - ------actual avg final fps:25.0002
+2025-03-25 09:37:29,974 - logger - INFO - ------actual avg final fps:24.9971
+2025-03-25 09:37:33,974 - logger - INFO - ------actual avg final fps:25.0018
+2025-03-25 09:37:37,974 - logger - INFO - ------actual avg final fps:25.0002
+2025-03-25 09:37:41,974 - logger - INFO - ------actual avg final fps:25.0036
+2025-03-25 09:37:45,973 - logger - INFO - ------actual avg final fps:25.0029
+2025-03-25 09:37:49,974 - logger - INFO - ------actual avg final fps:25.0003
+2025-03-25 09:37:53,974 - logger - INFO - ------actual avg final fps:24.9976
+2025-03-25 09:37:57,974 - logger - INFO - ------actual avg final fps:25.0005
+2025-03-25 09:38:01,974 - logger - INFO - ------actual avg final fps:25.0045
+2025-03-25 09:38:05,974 - logger - INFO - ------actual avg final fps:24.9974
+2025-03-25 09:38:09,974 - logger - INFO - ------actual avg final fps:25.0008
+2025-03-25 09:38:13,975 - logger - INFO - ------actual avg final fps:24.9966
+2025-03-25 09:38:17,974 - logger - INFO - ------actual avg final fps:25.0080
+2025-03-25 09:38:21,974 - logger - INFO - ------actual avg final fps:24.9984
+2025-03-25 09:38:25,975 - logger - INFO - ------actual avg final fps:24.9976
+2025-03-25 09:38:29,975 - logger - INFO - ------actual avg final fps:24.9963
+2025-03-25 09:38:33,974 - logger - INFO - ------actual avg final fps:25.0084
+2025-03-25 09:38:37,975 - logger - INFO - ------actual avg final fps:24.9948
+2025-03-25 09:38:41,975 - logger - INFO - ------actual avg final fps:24.9991
+2025-03-25 09:38:45,974 - logger - INFO - ------actual avg final fps:25.0076
+2025-03-25 09:38:49,974 - logger - INFO - ------actual avg final fps:25.0026
+2025-03-25 09:38:53,973 - logger - INFO - ------actual avg final fps:25.0035
+2025-03-25 09:38:57,974 - logger - INFO - ------actual avg final fps:24.9999
+2025-03-25 09:39:01,974 - logger - INFO - ------actual avg final fps:24.9961
+2025-03-25 09:39:05,973 - logger - INFO - ------actual avg final fps:25.0066
+2025-03-25 09:39:09,973 - logger - INFO - ------actual avg final fps:25.0015
+2025-03-25 09:39:13,974 - logger - INFO - ------actual avg final fps:24.9955
+2025-03-25 09:39:17,974 - logger - INFO - ------actual avg final fps:25.0042
+2025-03-25 09:39:21,974 - logger - INFO - ------actual avg final fps:25.0015
+2025-03-25 09:39:25,974 - logger - INFO - ------actual avg final fps:24.9996
+2025-03-25 09:39:29,973 - logger - INFO - ------actual avg final fps:25.0035
+2025-03-25 09:39:33,974 - logger - INFO - ------actual avg final fps:24.9942
+2025-03-25 09:39:37,974 - logger - INFO - ------actual avg final fps:25.0042
+2025-03-25 09:39:41,974 - logger - INFO - ------actual avg final fps:24.9981
+2025-03-25 09:39:45,974 - logger - INFO - ------actual avg final fps:25.0044
+2025-03-25 09:39:49,975 - logger - INFO - ------actual avg final fps:24.9950
+2025-03-25 09:39:53,975 - logger - INFO - ------actual avg final fps:24.9990
+2025-03-25 09:39:57,973 - logger - INFO - ------actual avg final fps:25.0103
+2025-03-25 09:40:01,974 - logger - INFO - ------actual avg final fps:25.0003
+2025-03-25 09:40:05,974 - logger - INFO - ------actual avg final fps:24.9982
+2025-03-25 09:40:09,974 - logger - INFO - ------actual avg final fps:25.0017
+2025-03-25 09:40:13,974 - logger - INFO - ------actual avg final fps:25.0008
+2025-03-25 09:40:17,975 - logger - INFO - ------actual avg final fps:24.9958
+2025-03-25 09:40:21,975 - logger - INFO - ------actual avg final fps:24.9985
+2025-03-25 09:40:25,975 - logger - INFO - ------actual avg final fps:25.0031
+2025-03-25 09:40:29,975 - logger - INFO - ------actual avg final fps:25.0013
+2025-03-25 09:40:33,974 - logger - INFO - ------actual avg final fps:25.0030
+2025-03-25 09:40:37,975 - logger - INFO - ------actual avg final fps:24.9961
+2025-03-25 09:40:41,974 - logger - INFO - ------actual avg final fps:25.0066
+2025-03-25 09:40:45,974 - logger - INFO - ------actual avg final fps:25.0022
+2025-03-25 09:40:49,975 - logger - INFO - ------actual avg final fps:24.9934
+2025-03-25 09:40:53,974 - logger - INFO - ------actual avg final fps:25.0104
+2025-03-25 09:40:57,974 - logger - INFO - ------actual avg final fps:24.9990
+2025-03-25 09:41:01,975 - logger - INFO - ------actual avg final fps:24.9957
+2025-03-25 09:41:05,974 - logger - INFO - ------actual avg final fps:25.0040
+2025-03-25 09:41:09,975 - logger - INFO - ------actual avg final fps:24.9947
+2025-03-25 09:41:13,974 - logger - INFO - ------actual avg final fps:25.0093
+2025-03-25 09:41:17,974 - logger - INFO - ------actual avg final fps:25.0025
+2025-03-25 09:41:21,974 - logger - INFO - ------actual avg final fps:24.9977
+2025-03-25 09:41:25,973 - logger - INFO - ------actual avg final fps:25.0044
+2025-03-25 09:41:29,975 - logger - INFO - ------actual avg final fps:24.9937
+2025-03-25 09:41:33,974 - logger - INFO - ------actual avg final fps:25.0057
+2025-03-25 09:41:37,973 - logger - INFO - ------actual avg final fps:25.0037
+2025-03-25 09:41:41,975 - logger - INFO - ------actual avg final fps:24.9926
+2025-03-25 09:41:45,974 - logger - INFO - ------actual avg final fps:25.0049
+2025-03-25 09:41:49,974 - logger - INFO - ------actual avg final fps:25.0017
+2025-03-25 09:41:53,974 - logger - INFO - ------actual avg final fps:25.0031
+2025-03-25 09:41:57,974 - logger - INFO - ------actual avg final fps:24.9970
+2025-03-25 09:42:01,974 - logger - INFO - ------actual avg final fps:25.0046
+2025-03-25 09:42:05,974 - logger - INFO - ------actual avg final fps:25.0002
+2025-03-25 09:42:09,974 - logger - INFO - ------actual avg final fps:24.9999
+2025-03-25 09:42:13,975 - logger - INFO - ------actual avg final fps:24.9947
+2025-03-25 09:42:17,974 - logger - INFO - ------actual avg final fps:25.0081
