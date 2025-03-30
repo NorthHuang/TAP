@@ -40,6 +40,7 @@
 
       <textarea cols="2" rows="3" style="width:600px;height:50px;" class="form-control" id="message">test</textarea>
     </div>
+    <button id="voice_button" type="button" class="btn btn-default">🎤 Long press to speak</button>
     <button type="submit" class="btn btn-default">Send</button>
   </form>
 
@@ -55,6 +56,52 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 </body>
 <script type="text/javascript" charset="utf-8">
+function enablePressToTalk(buttonId, onResult) {
+  if (!('webkitSpeechRecognition' in window)) {
+    alert('Browser does not support speech recognition');
+    return;
+  }
+  const recognition = new webkitSpeechRecognition();
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  recognition.lang = 'zh-CN';
+
+  let isRecording = false;
+
+  recognition.onresult = function (event) {
+    const transcript = event.results[0][0].transcript;
+    console.log('recognize: ' + transcript);
+    if (onResult) onResult(transcript);
+  };
+
+  recognition.onerror = function (event) {
+    console.error('Speech recognition error:', event.error);
+  };
+
+  recognition.onend = function () {
+    isRecording = false;
+    $('#' + buttonId).text('🎤 Long press to speak');
+  };
+
+  $('#' + buttonId)
+    .on('mousedown touchstart', function () {
+      if (!isRecording) {
+        recognition.start();
+        isRecording = true;
+        $('#' + buttonId).text('🛑 Recording...');
+      }
+    })
+    .on('mouseup touchend', function () {
+      if (isRecording) {
+        recognition.stop();
+      }
+    });
+}
+// initialize voice recognition
+enablePressToTalk('voice_button', function (text) {
+    $('#message').val(text);
+    $('#echo-form').submit();
+});
 
 	$(document).ready(function() {
 	  // var host = window.location.hostname
