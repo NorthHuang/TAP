@@ -68,6 +68,7 @@ class BaseTTS:
         self.state = State.PAUSE
 
     def put_msg_txt(self,msg:str,eventpoint=None): 
+        logger.info(f"[put_msg_txt] message: {msg}, eventpoint: {eventpoint}")
         if len(msg)>0:
             self.msgqueue.put((msg,eventpoint))
 
@@ -232,7 +233,7 @@ class FishTTS(BaseTTS):
 ###########################################################################################
 class VoitsTTS(BaseTTS):
     def txt_to_audio(self,msg): 
-        text,textevent = msg
+        text,eventpoint = msg
         # 加入 GPT
         try:
             logger.info(f"Sending to GPT: {text}")
@@ -245,6 +246,7 @@ class VoitsTTS(BaseTTS):
                     temperature=0.7
             )
             reply = gpt_response.choices[0].message.content
+            self.last_reply = reply 
             text = reply  
         except Exception as e:
             logger.error(f"GPT 请求失败: {e}")
@@ -258,7 +260,7 @@ class VoitsTTS(BaseTTS):
                 "zh", #en args.language,
                 self.opt.TTS_SERVER, #"http://127.0.0.1:5000", #args.server_url,
             ),
-            msg
+            (text,eventpoint)
         )
 
     def gpt_sovits(self, text, reffile, reftext,language, server_url) -> Iterator[bytes]:
@@ -323,6 +325,11 @@ class VoitsTTS(BaseTTS):
 
     def stream_tts(self,audio_stream,msg):
         text,textevent = msg
+        sessionid = textevent.get("sessionid")
+        full_text=getattr(self,'last_reply',text)
+        logger.info(f"[txt_to_audio] textevent = {textevent}")
+        logger.info(f"[Full Text] GPT reply text = '{full_text}'")
+        sent_chars=0
         first = True
         for chunk in audio_stream:
             if chunk is not None and len(chunk)>0:          
@@ -330,18 +337,32 @@ class VoitsTTS(BaseTTS):
                 #stream = resampy.resample(x=stream, sr_orig=32000, sr_new=self.sample_rate)
                 byte_stream=BytesIO(chunk)
                 stream = self.__create_bytes_stream(byte_stream)
+                if stream.shape[0] == 0:
+                    continue
                 streamlen = stream.shape[0]
                 idx=0
                 while streamlen >= self.chunk:
                     eventpoint=None
+                    if sent_chars < len(full_text):
+                        sent_chars +=1
+                        eventpoint={
+                            'status': 'streaming',
+                            'char': full_text[:sent_chars],
+                            'text': full_text,
+                            'sessionid': sessionid
+                        }
+
                     if first:
-                        eventpoint={'status':'start','text':text,'msgenvent':textevent}
+                        if not eventpoint:
+                            eventpoint = {'status': 'start', 'char': '', 'sessionid': sessionid}
+                        else:
+                            eventpoint['status'] = 'start'
                         first = False
                     self.parent.put_audio_frame(stream[idx:idx+self.chunk],eventpoint)
                     streamlen -= self.chunk
                     idx += self.chunk
-        eventpoint={'status':'end','text':text,'msgenvent':textevent}
-        self.parent.put_audio_frame(np.zeros(self.chunk,np.float32),eventpoint)
+        end_event={'status':'end','text':text,'sessionid': sessionid}
+        self.parent.put_audio_frame(np.zeros(self.chunk,np.float32),end_event)
 
 ###########################################################################################
 class CosyVoiceTTS(BaseTTS):

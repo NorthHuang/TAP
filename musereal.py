@@ -226,7 +226,7 @@ class MuseReal(BaseReal):
 
         self.asr = MuseASR(opt,self,self.audio_processor)
         self.asr.warm_up()
-        
+        self.main_loop = opt.main_loop
         self.render_event = mp.Event()
 
     def __del__(self):

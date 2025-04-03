@@ -45,7 +45,7 @@ import asyncio
 import torch
 from typing import Dict
 from logger import logger
-
+from global_data import nerfreals_ws_map
 
 app = Flask(__name__)
 #sockets = Sockets(app)
@@ -57,7 +57,7 @@ avatar = None
 
 #####webrtc###############################
 pcs = set()
-print("lalala")
+
 def randN(N)->int:
     '''生成长度为 N的随机数 '''
     min = pow(10, N - 1)
@@ -72,6 +72,7 @@ def build_nerfreal(sessionid:int)->BaseReal:
     elif opt.model == 'musetalk':
         from musereal import MuseReal
         nerfreal = MuseReal(opt,model,avatar)
+        opt.sessionid = sessionid
     elif opt.model == 'ernerf':
         from nerfreal import NeRFReal
         nerfreal = NeRFReal(opt,model,avatar)
@@ -131,6 +132,25 @@ async def offer(request):
             {"sdp": pc.localDescription.sdp, "type": pc.localDescription.type, "sessionid":sessionid}
         ),
     )
+async def websocket_handler(request):
+    ws = web.WebSocketResponse()
+    await ws.prepare(request)
+
+    sessionid = int(request.query.get("sessionid", "0"))
+    if sessionid not in nerfreals:
+        await ws.close()
+        return ws
+    nerfreals_ws_map[sessionid] = ws #绑定sessionid
+    logger.info(f"[WebSocket] Client connected to session {sessionid}")
+    try:
+        async for msg in ws:
+            pass  # 我们只需要 server → client，忽略 client → server 消息
+    except:
+        logger.warning("[WebSocket] connection closed unexpectedly")
+    finally:
+        nerfreals_ws_map.pop(sessionid, None)
+        await ws.close()
+    return ws
 
 async def human(request):
     params = await request.json()
@@ -140,7 +160,12 @@ async def human(request):
         nerfreals[sessionid].flush_talk()
 
     if params['type']=='echo':
-        nerfreals[sessionid].put_msg_txt(params['text'])
+        ws_list = getattr(nerfreals[sessionid], "websockets", [])
+        ws = ws_list[0] if ws_list else None
+        nerfreals[sessionid].put_msg_txt(
+            params['text'],
+            eventpoint={"websocket": nerfreals_ws_map.get(sessionid)}
+        )
     elif params['type']=='chat':
         res=await asyncio.get_event_loop().run_in_executor(None, llm_response, params['text'],nerfreals[sessionid])                         
         #nerfreals[sessionid].put_msg_txt(res)
@@ -394,6 +419,7 @@ if __name__ == '__main__':
     parser.add_argument('--listenport', type=int, default=8010)
 
     opt = parser.parse_args()
+    # opt.main_loop = asyncio.get_event_loop()
     #app.config.from_object(opt)
     #print(app.config)
     opt.customopt = []
@@ -454,6 +480,8 @@ if __name__ == '__main__':
     appasync.router.add_post("/record", record)
     appasync.router.add_post("/is_speaking", is_speaking)
     appasync.router.add_static('/',path='web')
+    appasync.router.add_get("/ws", websocket_handler)
+
 
     # Configure default CORS settings.
     cors = aiohttp_cors.setup(appasync, defaults={
@@ -476,6 +504,9 @@ if __name__ == '__main__':
     def run_server(runner):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
+
+        opt.main_loop = loop
+        
         loop.run_until_complete(runner.setup())
         site = web.TCPSite(runner, '0.0.0.0', opt.listenport)
         loop.run_until_complete(site.start())
@@ -495,5 +526,4 @@ if __name__ == '__main__':
     # print('start websocket server')
     # server = pywsgi.WSGIServer(('0.0.0.0', 8000), app, handler_class=WebSocketHandler)
     # server.serve_forever()
-    
-    
+
