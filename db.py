@@ -2,6 +2,7 @@
 import pymysql
 import bcrypt
 from aiohttp import web
+from aiohttp_session import get_session
 import os
 def get_connection():
     return pymysql.connect(
@@ -53,13 +54,14 @@ async def login(request):
     data = await request.json()
     username = data.get("username")
     password = data.get("password")
-
+    session = await get_session(request)
     try:
         conn = get_connection()
         with conn.cursor() as cursor:
             cursor.execute("SELECT * FROM users WHERE username = %s", (username,))
             user = cursor.fetchone()
             if user and bcrypt.checkpw(password.encode("utf-8"), user["password"].encode("utf-8")):
+                session["user_id"] = user["id"] #session
                 return web.json_response({"success": True, "message": "Login success", "role": user["role"]})
             else:
                 return web.json_response({"success": False, "message": "wrong username or password"})
