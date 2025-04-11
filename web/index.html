@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+        .container { max-width: 400px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input, .form-group select {
+            width: 100%; padding: 8px; box-sizing: border-box;
+        }
+        #register-fields { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="form-title">Login</h2>
+
+        <div id="form">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password">
+            </div>
+
+            <div id="register-fields">
+                <div class="form-group">
+                    <label>Confirm password</label>
+                    <input type="password" id="confirm-password">
+                </div>
+                <div class="form-group">
+                    <label>name</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="form-group">
+                    <label>Role</label>
+                    <select id="role" onchange="toggleStudentFields()">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+                </div>
+                <div id="student-extra">
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" id="age">
+                    </div>
+                    <div class="form-group">
+                        <label>Level</label>
+                        <select id="level">
+                            <option value="primary">Primary School</option>
+                            <option value="middle">Middle School</option>
+                            <option value="high">High School</option>
+                            <option value="university">University</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="submitForm()">Submit</button>
+            <br><br>
+            <a href="#" onclick="toggleMode()" id="toggle-link">Register</a>
+        </div>
+    </div>
+
+    <script>
+        let isRegisterMode = false;
+
+        function toggleMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('register-fields').style.display = isRegisterMode ? 'block' : 'none';
+            document.getElementById('form-title').textContent = isRegisterMode ? 'Register' : 'Login';
+            document.getElementById('toggle-link').textContent = isRegisterMode ? 'Back to Login' : 'Register';
+        }
+
+        function toggleStudentFields() {
+            const role = document.getElementById('role').value;
+            document.getElementById('student-extra').style.display = role === 'student' ? 'block' : 'none';
+        }
+
+        async function submitForm() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (isRegisterMode) {
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const name = document.getElementById('name').value;
+            const role = document.getElementById('role').value;
+
+            const payload = {
+                username,
+                password,
+                confirm_password: confirmPassword,
+                name,
+                role
+            };
+
+            if (role === 'student') {
+                payload.gender = document.getElementById('gender').value;
+                payload.age = parseInt(document.getElementById('age').value);
+                payload.level = document.getElementById('level').value;
+            }
+
+            const res = await fetch('/api/register', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+            alert(result.message);
+            if (result.success) toggleMode(); 
+        } else {
+            const payload = { username, password };
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(payload)
+            });
+
+            const result = await res.json();
+            alert(result.message);
+            if (result.success) {
+                window.location.href = "https://swintapai.com/webrtcapi.html";
+            }
+        }
+    }
+
+    </script>
+</body>
+</html>

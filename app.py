@@ -46,7 +46,9 @@ import torch
 from typing import Dict
 from logger import logger
 from global_data import nerfreals_ws_map
-
+from db import register, login
+from db import init_db
+init_db()
 app = Flask(__name__)
 #sockets = Sockets(app)
 nerfreals:Dict[int, BaseReal] = {} #sessionid:BaseReal
@@ -482,6 +484,8 @@ if __name__ == '__main__':
     appasync.router.add_static('/',path='web')
     appasync.router.add_get("/ws", websocket_handler)
     appasync.router.add_static('/static/', path='/home/zile/LiveTalking/static', name='static')
+    appasync.router.add_post("/api/register", register)
+    appasync.router.add_post("/api/login", login)
 
     # Configure default CORS settings.
     cors = aiohttp_cors.setup(appasync, defaults={
