@@ -481,7 +481,7 @@ if __name__ == '__main__':
     appasync.router.add_post("/is_speaking", is_speaking)
     appasync.router.add_static('/',path='web')
     appasync.router.add_get("/ws", websocket_handler)
-
+    appasync.router.add_static('/static/', path='/home/zile/LiveTalking/static', name='static')
 
     # Configure default CORS settings.
     cors = aiohttp_cors.setup(appasync, defaults={
