@@ -27,9 +27,7 @@ window.boot = function () {
     var onStart = function () {
 
         cc.view.enableRetina(true);
-        cc.view.setDesignResolutionSize(720, 1280, cc.ResolutionPolicy.SHOW_ALL);
-        cc.view.resizeWithBrowserSize(false);
-
+        cc.view.resizeWithBrowserSize(true);
 
         if (cc.sys.isBrowser) {
             setLoadingDisplay();
