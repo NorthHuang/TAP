@@ -80,7 +80,7 @@ async function loadUserProfile() {
   function toggleGame() {
     const wrapper = document.getElementById("gameFrameWrapper");
     const btn = document.getElementById("toggleGameBtn");
-  
+    const chat = document.getElementById("chat-log");
     if (!wrapper.hasChildNodes()) {
       const iframe = document.createElement("iframe");
       iframe.id = "gameFrame";
@@ -92,10 +92,12 @@ async function loadUserProfile() {
   
       wrapper.style.display = "block";
       btn.textContent = "关闭游戏";
+      if (chat) chat.style.display = "none";
     } else {
       wrapper.innerHTML = "";
       wrapper.style.display = "none";
       btn.textContent = "启动游戏";
+      if (chat) chat.style.display = "flex";
     }
   }
   
