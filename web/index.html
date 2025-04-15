@@ -130,8 +130,8 @@
             });
 
             const result = await res.json();
-            alert(result.message);
             if (result.success) {
+                localStorage.setItem("autoStart", "true");
                 window.location.href = "https://swintapai.com/webrtcapi.html";
             }
         }

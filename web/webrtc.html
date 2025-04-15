@@ -1,83 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WebRTC webcam</title>
-    <style>
-    button {
-        padding: 8px 16px;
-    }
-
-    video {
-        width: 100%;
-    }
-
-    .option {
-        margin-bottom: 8px;
-    }
-
-    #media {
-        max-width: 1280px;
-    }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=720, user-scalable=no">
+  <title>WebRTC Digital Human</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div class="option">
-    <input id="use-stun" type="checkbox"/>
-    <label for="use-stun">Use STUN server</label>
-</div>
-<button id="start" onclick="start()">Start</button>
-<button id="stop" style="display: none" onclick="stop()">Stop</button>
-<form class="form-inline" id="echo-form">
-    <div class="form-group">
-      <p>input text</p>
-
-      <textarea cols="2" rows="3" style="width:600px;height:50px;" class="form-control" id="message">test</textarea>
+  <div id="main-wrapper">
+    <button class="toggle-sidebar" onclick="toggleSidebar()">≡</button>
+    <div id="sidebar" class="sidebar hidden">
+      <h3>User Profile</h3>
+      <div class="profile-item">Name: <span id="name" onclick="editField('name')">(Click to edit)</span></div>
+      <div class="profile-item">Gender: <span id="gender" onclick="editField('gender')">(Click to edit)</span></div>
+      <div class="profile-item">Age: <span id="age" onclick="editField('age')">(Click to edit)</span></div>
+      <div class="profile-item">Level:
+        <select id="level">
+          <option value="primary">Primary School</option>
+          <option value="middle">Middle School</option>
+          <option value="high">High School</option>
+          <option value="university">University</option>
+        </select>
+      </div>
+      <button onclick="saveProfile()">Save</button>
+      <button onclick="logout()" style="margin-top: 10px; background-color: #dc3545; color: white;">Logout</button>
     </div>
-    <button type="submit" class="btn btn-default">Send</button>
-  </form>
 
-<div id="media">
-    <h2>Media</h2>
+    <div class="container">
+      <!-- <div class="option">
+        <input id="use-stun" type="checkbox" />
+        <label for="use-stun">Use STUN server</label>
+      </div> -->
+      <!-- <div class="control-panel">
+        <button id="start" onclick="start()">启动数字人</button>
+      </div> -->
+      <div class="video-container">
+        <video id="video" autoplay playsinline></video>
+      </div>
+      <div class="bottom-panel">
+        <button id="voice_button">🎤</button>
+        <input type="text" id="message" placeholder="请输入内容..." />
+        <button id="send_button">发送</button>
+      </div>
+      <input type="hidden" id="sessionid" value="0">
+    </div>
 
-    <audio id="audio" autoplay="true"></audio>
-    <video id="video" style="width:600px;" autoplay="true" playsinline="true"></video>
-</div>
+    <div id="gameFrameWrapper"></div>
+  </div>
+  <div id="chat-log" class="chat-bottom"></div>
+  <button id="toggleGameBtn" onclick="toggleGame()" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;">
+    启动游戏
+  </button>
 
-<script src="client.js"></script>
-<script type="text/javascript" src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="client.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="main.js"></script>
 </body>
-<script type="text/javascript" charset="utf-8">
-
-	$(document).ready(function() {
-	  var host = window.location.hostname
-	  var ws = new WebSocket("ws://"+host+":8000/humanecho");
-	  //document.getElementsByTagName("video")[0].setAttribute("src", aa["video"]);
-	  ws.onopen = function() {
-		console.log('Connected');
-	  };
-	  ws.onmessage = function(e) {
-		console.log('Received: ' + e.data);
-		data = e
-		var vid = JSON.parse(data.data); 
-		console.log(typeof(vid),vid)
-		//document.getElementsByTagName("video")[0].setAttribute("src", vid["video"]);
-		
-	  };
-	  ws.onclose = function(e) {
-		console.log('Closed');
-	  };
-
-	  $('#echo-form').on('submit', function(e) {
-		e.preventDefault();
-		var message = $('#message').val();
-		console.log('Sending: ' + message);
-		ws.send(message);
-		$('#message').val('');
-	  });
-	});
-</script>
 </html>
