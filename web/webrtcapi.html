@@ -1,400 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=720, user-scalable=no">
   <title>WebRTC Digital Human</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-    }
-
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 250px;
-      background-color: #ffffff;
-      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-      padding: 16px;
-      transition: transform 0.3s ease;
-    }
-
-    .sidebar.hidden {
-      transform: translateX(-100%);
-    }
-
-    .profile-item {
-      margin-bottom: 10px;
-    }
-
-    .profile-item span {
-      font-weight: bold;
-    }
-
-    .profile-item button {
-      margin-left: 10px;
-      padding: 2px 6px;
-      font-size: 12px;
-    }
-
-    .toggle-sidebar {
-      position: fixed;
-      left: 0;
-      top: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 6px 10px;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-      z-index: 1000;
-    }
-
-    .container {
-      max-width: 420px;
-      margin: 30px auto;
-      background-color: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .control-panel {
-      text-align: center;
-      padding: 10px;
-    }
-
-    #start {
-      padding: 8px 16px;
-      font-size: 14px;
-      border-radius: 8px;
-      border: none;
-      background-color: #28a745;
-      color: white;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-
-    .video-container {
-      position: relative;
-      background-color: #000;
-    }
-
-    video {
-      width: 100%;
-      display: block;
-      border-radius: 0;
-    }
-
-    .chat-overlay {
-      position: absolute;
-      bottom: 0px;
-      left: 0;
-      right: 0;
-      height: 150px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column-reverse;
-      pointer-events: auto;
-      padding: 0 0 0 5px;
-      scrollbar-width: thin;
-      cursor: grab;
-    }
-
-    .chat-overlay::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .chat-overlay::-webkit-scrollbar-thumb {
-      background-color: rgba(255, 255, 255, 0.4);
-      border-radius: 3px;
-    }
-
-    .chat-bubble {
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 8px 12px;
-      border-radius: 12px;
-      margin-bottom: 6px;
-      font-size: 14px;
-      align-self: flex-start;
-      width: fit-content;
-      max-width: 90%;
-    }
-
-    .bottom-panel {
-      display: flex;
-      align-items: center;
-      border-top: 1px solid #eee;
-      padding: 10px;
-      gap: 10px;
-    }
-
-    #voice_button {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
-      background-color: #f0f0f0;
-      border: none;
-      border-radius: 50%;
-      font-size: 18px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    #voice_button.recording {
-      background-color: #ff6666;
-      color: white;
-    }
-
-    #message {
-      flex: 1;
-      height: 40px;
-      padding: 6px 10px;
-      border-radius: 20px;
-      border: 1px solid #ccc;
-      outline: none;
-      font-size: 14px;
-    }
-
-    #send_button {
-      flex-shrink: 0;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 0 16px;
-      height: 40px;
-      border-radius: 20px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button class="toggle-sidebar" onclick="toggleSidebar()">≡</button>
-  <div id="sidebar" class="sidebar hidden">
-    <h3>User Profile</h3>
-    <div class="profile-item">Name: <span id="name" onclick="editField('name')">(Click to edit)</span></div>
-    <div class="profile-item">Gender: <span id="gender" onclick="editField('gender')">(Click to edit)</span></div>
-    <div class="profile-item">Age: <span id="age" onclick="editField('age')">(Click to edit)</span></div>
-    <div class="profile-item">Level: 
-      <select id="level">
-        <option value="primary">Primary School</option>
-        <option value="middle">Middle School</option>
-        <option value="high">High School</option>
-        <option value="university">University</option>
-      </select>
-    </div>
-    <button onclick="saveProfile()">Save</button>
-    <button onclick="logout()" style="margin-top: 10px; background-color: #dc3545; color: white;">Logout</button>
-  </div>
-
-  <div class="container">
-    <div class="option">
-      <input id="use-stun" type="checkbox"/>
-      <label for="use-stun">Use STUN server</label>
-    </div>
-    <div class="control-panel">
-      <button id="start" onclick="start()">启动数字人</button>
-    </div>
-    <div class="video-container">
-      <video id="video" autoplay playsinline></video>
-      <div class="chat-overlay" id="chat-log"></div>
+  <div id="main-wrapper">
+    <button class="toggle-sidebar" onclick="toggleSidebar()">≡</button>
+    <div id="sidebar" class="sidebar hidden">
+      <h3>User Profile</h3>
+      <div class="profile-item">Name: <span id="name" onclick="editField('name')">(Click to edit)</span></div>
+      <div class="profile-item">Gender: <span id="gender" onclick="editField('gender')">(Click to edit)</span></div>
+      <div class="profile-item">Age: <span id="age" onclick="editField('age')">(Click to edit)</span></div>
+      <div class="profile-item">Level:
+        <select id="level">
+          <option value="primary">Primary School</option>
+          <option value="middle">Middle School</option>
+          <option value="high">High School</option>
+          <option value="university">University</option>
+        </select>
+      </div>
+      <button onclick="saveProfile()">Save</button>
+      <button onclick="logout()" style="margin-top: 10px; background-color: #dc3545; color: white;">Logout</button>
     </div>
 
-    <div class="bottom-panel">
-      <button id="voice_button">🎤</button>
-      <input type="text" id="message" placeholder="请输入内容..." />
-      <button id="send_button">发送</button>
+    <div class="container">
+      <!-- <div class="option">
+        <input id="use-stun" type="checkbox" />
+        <label for="use-stun">Use STUN server</label>
+      </div> -->
+      <!-- <div class="control-panel">
+        <button id="start" onclick="start()">启动数字人</button>
+      </div> -->
+      <div class="video-container">
+        <video id="video" autoplay playsinline></video>
+      </div>
+      <div class="bottom-panel">
+        <button id="voice_button">🎤</button>
+        <input type="text" id="message" placeholder="请输入内容..." />
+        <button id="send_button">发送</button>
+      </div>
+      <input type="hidden" id="sessionid" value="0">
     </div>
-    <input type="hidden" id="sessionid" value="0">
+
+    <div id="gameFrameWrapper"></div>
   </div>
-  <button onclick="document.getElementById('gameFrame').style.display = 'block'">
+  <div id="chat-log" class="chat-bottom"></div>
+  <button id="toggleGameBtn" onclick="toggleGame()" style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000;">
     启动游戏
   </button>
-  <iframe id="gameFrame"
-          src="/static/gameA/index.html"
-          style="display: none; width: 100%; height: 600px; border: none; margin-top: 20px;">
-  </iframe>
-
-  <script>
-    async function loadUserProfile() {
-    try {
-      const res = await fetch("/api/get_profile");
-      const data = await res.json();
-      if (data.success) {
-        document.getElementById("name").textContent = data.profile.name || "(Click to edit)";
-        document.getElementById("gender").textContent = data.profile.gender || "(Click to edit)";
-        document.getElementById("age").textContent = data.profile.age || "(Click to edit)";
-        document.getElementById("level").value = data.profile.level || "(Click to edit)";
-        document.getElementById("sidebar").classList.remove("hidden");
-      } else {
-        console.warn("Not logged in or failed to fetch profile.");
-      }
-    } catch (err) {
-      console.error("Error loading user profile:", err);
-    }
-  }
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("hidden");
-    }
-
-    let editedProfile = {};
-
-  function editField(field) {
-    const span = document.getElementById(field);
-    const currentValue = span.textContent;
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = currentValue.includes("Click to edit") ? "" : currentValue;
-    input.onblur = () => {
-      span.textContent = input.value || "(Click to edit)";
-      editedProfile[field] = input.value;
-    };
-    input.onkeydown = (e) => {
-      if (e.key === 'Enter') {
-        input.blur();
-      }
-    };
-    span.textContent = "";
-    span.appendChild(input);
-    input.focus();
-  }
-  function saveProfile() {
-    const name = document.getElementById("name").textContent;
-    const gender = document.getElementById("gender").textContent;
-    const age = document.getElementById("age").textContent;
-    const level = document.getElementById("level").value;
-
-    const updates = [
-      { field: "name", value: name },
-      { field: "gender", value: gender },
-      { field: "age", value: age },
-      { field: "level", value: level }
-    ];
-    Promise.all(updates.map(({field, value}) => {
-      return fetch('/api/update_profile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ field, value })
-      }).then(res => res.json());
-    })).then(results => {
-      const failed = results.find(r => !r.success);
-      if (failed) {
-        alert("Some updates failed");
-      } else {
-        alert("Profile updated successfully");
-        editedProfile = {};  // reset
-      }
-    });
-  }
-  function logout() {
-    fetch('/api/logout', { method: 'POST' }).then(() => {
-      window.location.href = 'index.html';
-    });
-  }
-    window.onload = loadUserProfile;
-  </script>
 
   <script src="client.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script>
-    function addChatMessage(text) {
-      const chat = document.getElementById("chat-log");
-      const div = document.createElement("div");
-      div.className = "chat-bubble";
-      div.textContent = text;
-      chat.prepend(div);
-    }
-
-    document.getElementById("send_button").addEventListener("click", function () {
-      const message = document.getElementById("message").value.trim();
-      if (!message) return;
-
-      addChatMessage("我：" + message);
-
-      fetch('/human', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          text: message,
-          type: 'echo',
-          interrupt: true,
-          sessionid: parseInt(document.getElementById('sessionid').value || "0")
-        })
-      });
-
-      document.getElementById("message").value = "";
-    });
-
-    function enablePressToTalk(buttonId, onResult) {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert('Browser does not support speech recognition');
-        return;
-      }
-
-      const recognition = new webkitSpeechRecognition();
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.lang = 'zh-CN';
-
-      let isRecording = false;
-
-      recognition.onresult = function (event) {
-        const transcript = event.results[0][0].transcript;
-        if (onResult) onResult(transcript);
-      };
-
-      recognition.onerror = function (event) {
-        console.error('Speech recognition error:', event.error);
-      };
-
-      recognition.onend = function () {
-        isRecording = false;
-        const btn = document.getElementById(buttonId);
-        btn.classList.remove("recording");
-        btn.textContent = '🎤';
-      };
-
-      const btn = document.getElementById(buttonId);
-      btn.addEventListener('mousedown', () => {
-        if (!isRecording) {
-          recognition.start();
-          isRecording = true;
-          btn.classList.add("recording");
-          btn.textContent = '⏹';
-        }
-      });
-
-      btn.addEventListener('mouseup', () => {
-        if (isRecording) recognition.stop();
-      });
-
-      btn.addEventListener('touchstart', () => {
-        if (!isRecording) {
-          recognition.start();
-          isRecording = true;
-          btn.classList.add("recording");
-          btn.textContent = '⏹';
-        }
-      });
-
-      btn.addEventListener('touchend', () => {
-        if (isRecording) recognition.stop();
-      });
-    }
-
-    enablePressToTalk('voice_button', function (text) {
-      document.getElementById("message").value = text;
-      document.getElementById("send_button").click();
-    });
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>
