@@ -122,7 +122,7 @@ def init_db():
     finally:
         conn.close()
 
-def generate_questions():
+def generate_questions(request):
     try:
         with open("data/questions.json", "r", encoding="utf-8") as f:
             questions = json.load(f)
@@ -146,6 +146,6 @@ def generate_questions():
                     q['created_by']
                 ))
         conn.commit()
-        return jsonify({"message": "Question bank generated successfully."})
+        return web.json_response({"message": "Question bank generated successfully."})
     except Exception as e:
-        return jsonify({"message": f"Failed to generate questions: {e}"})
+        return web.json_response({"message": f"Failed to generate questions: {e}"}, status=500)
