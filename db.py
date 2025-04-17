@@ -149,3 +149,29 @@ def generate_questions(request):
         return web.json_response({"message": "Question bank generated successfully."})
     except Exception as e:
         return web.json_response({"message": f"Failed to generate questions: {e}"}, status=500)
+
+async def get_questions(request):
+    subject = request.query.get('subject')  # 
+    level = request.query.get('education_level') 
+    try:
+        conn = get_connection()
+        with conn.cursor(dictionary=True) as cursor:
+            sql = "SELECT * FROM questions WHERE 1=1"
+            params = []
+
+            if subject:
+                sql += " AND subject = %s"
+                params.append(subject)
+            if level:
+                sql += " AND education_level = %s"
+                params.append(level)
+
+            cursor.execute(sql, params)
+            result = cursor.fetchall()
+            for row in result:
+                row["options"] = json.loads(row["options"])
+
+        conn.close()
+        return web.json_response(result)
+    except Exception as e:
+        return web.json_response({"message": f"Failed to get questions: {e}"}, status=500)

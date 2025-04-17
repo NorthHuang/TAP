@@ -46,7 +46,7 @@ import torch
 from typing import Dict
 from logger import logger
 from global_data import nerfreals_ws_map
-from db import register, login, generate_questions, init_db
+from db import register, login, generate_questions, init_db, get_questions
 from user_profile import logout, get_profile, update_profile
 from session_setup import setup_sessions
 init_db()
@@ -492,6 +492,7 @@ if __name__ == '__main__':
     appasync.router.add_get("/api/get_profile", get_profile)
     appasync.router.add_post("/api/update_profile", update_profile)
     appasync.router.add_post("/api/generate_questions", generate_questions)
+    appasync.router.add_get("/api/get_questions", get_questions)
 
     # Configure default CORS settings.
     cors = aiohttp_cors.setup(appasync, defaults={
