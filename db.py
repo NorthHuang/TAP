@@ -5,6 +5,7 @@ from aiohttp import web
 from aiohttp_session import get_session
 import os
 import json
+import datetime
 def get_connection():
     return pymysql.connect(
         host=os.getenv("DB_HOST", "127.0.0.1"),
@@ -155,7 +156,7 @@ async def get_questions(request):
     level = request.query.get('education_level') 
     try:
         conn = get_connection()
-        with conn.cursor(dictionary=True) as cursor:
+        with conn.cursor() as cursor:
             sql = "SELECT * FROM questions WHERE 1=1"
             params = []
 
@@ -169,9 +170,13 @@ async def get_questions(request):
             cursor.execute(sql, params)
             result = cursor.fetchall()
             for row in result:
-                row["options"] = json.loads(row["options"])
-
+                if row.get("options"):
+                    row["options"] = json.loads(row["options"])
+                for key, value in row.items():
+                    if isinstance(value, (datetime.datetime, datetime.date)):
+                        row[key] = value.isoformat()
         conn.close()
         return web.json_response(result)
     except Exception as e:
+        print("[get_questions ERROR]", e) 
         return web.json_response({"message": f"Failed to get questions: {e}"}, status=500)
