@@ -4,6 +4,7 @@ import bcrypt
 from aiohttp import web
 from aiohttp_session import get_session
 import os
+import json
 def get_connection():
     return pymysql.connect(
         host=os.getenv("DB_HOST", "127.0.0.1"),
@@ -120,3 +121,31 @@ def init_db():
         print(f"Database initialization failed: {e}")
     finally:
         conn.close()
+
+def generate_questions():
+    try:
+        with open("data/questions.json", "r", encoding="utf-8") as f:
+            questions = json.load(f)
+
+        conn = get_connection()
+        with conn.cursor() as cursor:
+            sql = """
+                INSERT INTO questions (
+                    description, subject, education_level, options, answer, explanation, difficulty, created_by
+                ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);
+            """
+            for q in questions:
+                cursor.execute(sql, (
+                    q['description'],
+                    q['subject'],
+                    q['education_level'],
+                    json.dumps(q['options']),
+                    q['answer'],
+                    q.get('explanation', None),
+                    q.get('difficulty', 'medium'),
+                    q['created_by']
+                ))
+        conn.commit()
+        return jsonify({"message": "Question bank generated successfully."})
+    except Exception as e:
+        return jsonify({"message": f"Failed to generate questions: {e}"})
