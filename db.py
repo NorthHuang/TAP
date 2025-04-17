@@ -98,7 +98,22 @@ def init_db():
                     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
                 );
             """)
-
+            # Create questions table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS questions (
+                    question_id INT AUTO_INCREMENT PRIMARY KEY,
+                    description TEXT NOT NULL,
+                    subject ENUM('English', 'Chinese', 'Math') NOT NULL,
+                    education_level ENUM('Primary', 'Junior', 'Senior', 'University', 'IELTS') NOT NULL,
+                    options JSON NOT NULL,
+                    answer VARCHAR(10) NOT NULL,
+                    explanation TEXT,
+                    difficulty ENUM('easy', 'medium', 'hard') DEFAULT 'medium',
+                    created_by VARCHAR(100) NOT NULL,
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+                );
+            """)
         conn.commit()
         print("Database initialized (tables created if not exist)")
     except Exception as e:
