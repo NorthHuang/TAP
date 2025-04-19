@@ -2,7 +2,7 @@
 from aiohttp import web
 from db import get_connection
 from aiohttp_session import get_session
-
+import json
 def default_skin_state():
     return [True] + [False] * 9
 
@@ -51,17 +51,28 @@ async def update_profile(request):
         data = await request.json()
         field = data.get("field")
         value = data.get("value")
-
-        if field not in ["name", "gender", "age", "level"]:
+        allowed_user_fields = ["name"]
+        allowed_student_fields = ["gender", "age", "level", "unlocked_backgrounds", "unlocked_fish_skins"]
+        if field not in allowed_user_fields + allowed_student_fields:
             return web.json_response({"success": False, "message": "Invalid field"})
 
         conn = get_connection()
         with conn.cursor() as cursor:
-            if field == "name":
-                cursor.execute("UPDATE users SET name = %s WHERE id = %s", (value, user_id))
-            else:
-                cursor.execute("UPDATE student_info SET {} = %s WHERE user_id = %s".format(field), (value, user_id))
+            cursor.execute("SELECT role FROM users WHERE id = %s", (user_id,))
+            result = cursor.fetchone()
+            if not result:
+                return web.json_response({"success": False, "message": "User not found"})
+            role = result["role"]
 
+            if field in allowed_user_fields:
+                cursor.execute("UPDATE users SET {} = %s WHERE id = %s".format(field), (value, user_id))
+
+            elif field in allowed_student_fields:
+                if role != "student":
+                    return web.json_response({"success": False, "message": "Only students can update this field"})
+                if field in ["unlocked_backgrounds", "unlocked_fish_skins"]:
+                    value = json.dumps(value)
+                cursor.execute("UPDATE student_info SET {} = %s WHERE user_id = %s".format(field), (value, user_id))
         conn.commit()
         return web.json_response({"success": True})
     except Exception as e:
