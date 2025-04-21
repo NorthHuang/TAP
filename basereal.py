@@ -47,7 +47,12 @@ def read_imgs(img_list):
         frame = cv2.imread(img_path)
         frames.append(frame)
     return frames
-
+def log_ws_send_result(future):
+    try:
+        result = future.result()
+        logger.info(f"[✅ WebSocket] Send completed → {result}")
+    except Exception as e:
+        logger.warning(f"[⚠️ WebSocket] Send failed: {e}")
 class BaseReal:
     def __init__(self, opt):
         self.opt = opt
@@ -82,13 +87,11 @@ class BaseReal:
         self.custom_index = {}
         self.custom_opt = {}
         self.__loadcustom()
-
     def put_msg_txt(self,msg,eventpoint):
         logger.info(f"[put_msg_txt] Queued: msg={msg}, eventpoint={eventpoint}")
         if "sessionid" not in eventpoint:
             eventpoint["sessionid"] = self.opt.sessionid
         self.tts.put_msg_txt(msg,eventpoint)
-    
     def put_audio_frame(self,audio_chunk,eventpoint=None): #16khz 20ms pcm
         # logger.info(f"[put_audio_frame] Event: {eventpoint}")
         if eventpoint:
@@ -97,24 +100,32 @@ class BaseReal:
             logger.info(f"[put_audio_frame] status={status}, sessionid={sessionid}, eventpoint={eventpoint}")
             if sessionid is not None:
                 ws = nerfreals_ws_map.get(sessionid)
-                logger.info(f"[ws] Event: {ws}")
+                # logger.info(f"[ws] Event: {ws}")
                 if ws is not None and not ws.closed:
-                    logger.info(f"[ws] ✅ WebSocket is open and usable")
+                    # logger.info(f"[ws] ✅ WebSocket is open and usable")
                     loop = self.main_loop
                     if status == "streaming":
                         gpt_text = eventpoint.get("char")
                         logger.info(f"[eventpoint] getting char → {gpt_text}")
                         if gpt_text:
-                            logger.info(f"[WebSocket] Sending gpt_stream → {gpt_text}")
-                            logger.warning(f"[Loop DEBUG] main_loop = {self.main_loop}, is_running = {self.main_loop.is_running()}")
+                            # logger.info(f"[WebSocket] Sending gpt_stream → {gpt_text}")
+                            # logger.warning(f"[Loop DEBUG] main_loop = {self.main_loop}, is_running = {self.main_loop.is_running()}")
                             future = asyncio.run_coroutine_threadsafe(
                                 ws.send_str(json.dumps({"type": "gpt_stream", "text": gpt_text})),
                                 loop
                             )
-                            future.add_done_callback(lambda f: logger.info(f"[✅ WebSocket] Send completed → {f.result()}"))
+                            # future.add_done_callback(lambda f: logger.info(f"[✅ WebSocket] Send completed → {f.result()}"))
+                            future.add_done_callback(log_ws_send_result)
                     elif status == "end":
+                        message = {
+                            "type": "gpt_end",
+                            "text": eventpoint.get("text")
+                        }
+                        if eventpoint.get("start_game"):
+                            logger.info("[🛰️ WebSocket] Detected start_game=True, adding to message")
+                            message["start_game"] = True
                         asyncio.run_coroutine_threadsafe(
-                            ws.send_str(json.dumps({"type": "gpt_end", "text": eventpoint.get("text")})),
+                            ws.send_str(json.dumps(message)),
                             loop
                         )
         self.asr.put_audio_frame(audio_chunk,eventpoint)

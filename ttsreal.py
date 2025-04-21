@@ -237,16 +237,32 @@ class VoitsTTS(BaseTTS):
         # 加入 GPT
         try:
             logger.info(f"Sending to GPT: {text}")
+            if not hasattr(self, 'chat_history'):
+                self.chat_history = [
+                     {"role": "system",
+                        "content": "你是一个聪明、亲切、有温度的女性语音助手，名字叫『小语』。你会根据用户的语言（中文或英文）进行回复。\n\
+                        你知道有一款适合边学边玩的小游戏（educational mini-game）。当用户询问是否有这种游戏时（例如“有没有可以一边学一边玩的游戏？”或“any fun game to learn something?”），你可以推荐这个游戏，并询问他们是否想开始。\n\
+                        如果用户确认（如“想玩”、“开始”、“start the game”），请用明确关键词“启动游戏”（中文）或 “StartGame” （英文）标记你要通知系统启动游戏。\n\
+                        回答务必自然、亲切，并用与用户一致的语言（中或英）进行回答。"
+                }
+                ]
+            # limit the number of conversation
+            MAX_HISTORY = 40
+            if len(self.chat_history) > MAX_HISTORY + 1:
+                self.chat_history = [self.chat_history[0]] + self.chat_history[-MAX_HISTORY:]
+
+            self.chat_history.append({"role": "user", "content": text})
             gpt_response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=[
-                    {"role": "system", "content": "你是一个语音助手，请用简洁回答问题"},
-                    {"role": "user", "content": text}
-                ],
-                    temperature=0.7
+                model="gpt-4o",
+                messages=self.chat_history,
+                temperature=0.7
             )
             reply = gpt_response.choices[0].message.content
-            self.last_reply = reply 
+            self.chat_history.append({"role": "assistant", "content": reply})
+            if "启动游戏" in reply or "StartGame" in reply:
+                logger.info("[GPT] 已识别启动游戏关键词")
+                if eventpoint is not None:
+                    eventpoint["start_game"] = True 
             text = reply  
         except Exception as e:
             logger.error(f"GPT 请求失败: {e}")
@@ -361,7 +377,10 @@ class VoitsTTS(BaseTTS):
                     self.parent.put_audio_frame(stream[idx:idx+self.chunk],eventpoint)
                     streamlen -= self.chunk
                     idx += self.chunk
-        end_event={'status':'end','text':text,'sessionid': sessionid}
+        # end_event={'status':'end','text':text,'sessionid': sessionid}
+        end_event = dict(textevent)  # 拷贝之前的 eventpoint
+        end_event['status'] = 'end'
+        end_event['text'] = text
         self.parent.put_audio_frame(np.zeros(self.chunk,np.float32),end_event)
 
 ###########################################################################################

@@ -109,7 +109,7 @@ function toggleGame() {
     if (chat) chat.style.display = "flex";
   }
 }
-
+window.toggleGame = toggleGame;
 function addChatMessage(text) {
   const chat = document.getElementById("chat-log");
   const div = document.createElement("div");

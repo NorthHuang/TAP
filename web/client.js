@@ -33,6 +33,15 @@ function setupWebSocket(sessionid) {
       addGptChatBubble(data.text);
     } else if (data.type === "gpt_end") {
       finalizeGptBubble(data.text);
+      //启动游戏
+      if(data.start_game){
+        setTimeout(() => {
+          console.log("✅ 现在启动游戏！");
+          if (typeof window.toggleGame === "function") {
+            window.toggleGame();
+          }
+        }, 3000);
+      }
     }
   };
 }
