@@ -26,7 +26,7 @@ import time
 import cv2
 import glob
 import resampy
-
+import copy
 import queue
 from queue import Queue
 from threading import Thread, Event
@@ -94,9 +94,15 @@ class BaseReal:
         self.tts.put_msg_txt(msg,eventpoint)
     def put_audio_frame(self,audio_chunk,eventpoint=None): #16khz 20ms pcm
         # logger.info(f"[put_audio_frame] Event: {eventpoint}")
-        if eventpoint:
-            status = eventpoint.get('status')
-            sessionid = eventpoint.get('sessionid')
+        safe_event = {}
+        if isinstance(eventpoint, dict):
+            safe_event = {
+                k: v for k, v in eventpoint.items()
+                if k not in ('websocket',) and not isinstance(v, asyncio.Future)
+            }
+        if safe_event:
+            status = safe_event.get('status')
+            sessionid = safe_event.get('sessionid')
             logger.info(f"[put_audio_frame] status={status}, sessionid={sessionid}, eventpoint={eventpoint}")
             if sessionid is not None:
                 ws = nerfreals_ws_map.get(sessionid)
@@ -105,8 +111,8 @@ class BaseReal:
                     # logger.info(f"[ws] ✅ WebSocket is open and usable")
                     loop = self.main_loop
                     if status == "streaming":
-                        gpt_text = eventpoint.get("char")
-                        logger.info(f"[eventpoint] getting char → {gpt_text}")
+                        gpt_text = safe_event.get("char")
+                        logger.info(f"[safe_event] getting char → {gpt_text}")
                         if gpt_text:
                             # logger.info(f"[WebSocket] Sending gpt_stream → {gpt_text}")
                             # logger.warning(f"[Loop DEBUG] main_loop = {self.main_loop}, is_running = {self.main_loop.is_running()}")
@@ -119,16 +125,16 @@ class BaseReal:
                     elif status == "end":
                         message = {
                             "type": "gpt_end",
-                            "text": eventpoint.get("text")
+                            "text": safe_event.get("text")
                         }
-                        if eventpoint.get("start_game"):
+                        if safe_event.get("start_game"):
                             logger.info("[🛰️ WebSocket] Detected start_game=True, adding to message")
                             message["start_game"] = True
                         asyncio.run_coroutine_threadsafe(
                             ws.send_str(json.dumps(message)),
                             loop
                         )
-        self.asr.put_audio_frame(audio_chunk,eventpoint)
+        self.asr.put_audio_frame(audio_chunk,safe_event)
 
     def put_audio_file(self,filebyte): 
         input_stream = BytesIO(filebyte)
