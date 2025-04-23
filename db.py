@@ -15,9 +15,10 @@ def get_connection():
         charset='utf8mb4',
         cursorclass=pymysql.cursors.DictCursor
 )
-def default_skin_state():
+def default_background_skin_state():
     return [True] + [False] * 9
-
+def default_fish_skin_state():
+    return [True] + [False] * 16
 async def register(request):
     data = await request.json()
     username = data.get("username")
@@ -42,8 +43,8 @@ async def register(request):
                 gender = data.get("gender")
                 age = data.get("age")
                 level = data.get("level")
-                unlocked_backgrounds = json.dumps(default_skin_state())
-                unlocked_fish_skins = json.dumps(default_skin_state())
+                unlocked_backgrounds = json.dumps(default_background_skin_state())
+                unlocked_fish_skins = json.dumps(default_fish_skin_state())
                 sql2 = "INSERT INTO student_info (user_id, gender, age, level, unlocked_backgrounds, unlocked_fish_skins) VALUES (%s, %s, %s, %s, %s, %s)"
                 cursor.execute(sql2, (user_id, gender, age, level, unlocked_backgrounds, unlocked_fish_skins))
 

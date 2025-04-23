@@ -3,9 +3,10 @@ from aiohttp import web
 from db import get_connection
 from aiohttp_session import get_session
 import json
-def default_skin_state():
+def default_background_skin_state():
     return [True] + [False] * 9
-
+def default_fish_skin_state():
+    return [True] + [False] * 16
 async def get_profile(request):
     session = await get_session(request)
     user_id = session.get("user_id")
@@ -31,8 +32,8 @@ async def get_profile(request):
                         "gender": student["gender"],
                         "age": student["age"],
                         "level": student["level"],
-                        "unlocked_backgrounds": json.loads(student["unlocked_backgrounds"]) if student["unlocked_backgrounds"] else default_skin_state(),
-                        "unlocked_fish_skins": json.loads(student["unlocked_fish_skins"]) if student["unlocked_fish_skins"] else default_skin_state()
+                        "unlocked_backgrounds": json.loads(student["unlocked_backgrounds"]) if student["unlocked_backgrounds"] else default_background_skin_state(),
+                        "unlocked_fish_skins": json.loads(student["unlocked_fish_skins"]) if student["unlocked_fish_skins"] else default_fish_skin_state()
                     })
 
         return web.json_response({"success": True, "profile": profile})
