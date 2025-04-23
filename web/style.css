@@ -120,7 +120,7 @@ video {
 .chat-bottom {
   position: fixed;
   bottom: 70px; 
-  left: 45%;
+  left: 51%;
   transform: translateX(-50%);
   width: 680px;
   max-height: 200px;
