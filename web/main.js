@@ -1,3 +1,17 @@
+const MAX_FILE_SIZE_MB = 5;
+const ALLOWED_TYPES = ['application/pdf', 'text/csv', 'image/png', 'image/jpeg', 'text/plain'];
+function validateFile(file) {
+  if (file.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+    alert("The file is too large. The maximum allowed is 5MB.");
+    return false;
+  }
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    alert("The file format is not supported, only pdf/csv/png/jpg/jpeg/txt are allowed!");
+    return false;
+  }
+  return true;
+}
+
 async function loadUserProfile() {
   try {
     const res = await fetch("/api/get_profile");
@@ -121,20 +135,36 @@ function addChatMessage(text) {
 document.getElementById("send_button").addEventListener("click", function () {
   const message = document.getElementById("message").value.trim();
   if (!message) return;
-
-  addChatMessage("我：" + message);
-
-  fetch('/human', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      text: message,
-      type: 'echo',
-      interrupt: true,
-      sessionid: parseInt(document.getElementById('sessionid').value || "0")
-    })
-  });
-
+  if(pendingFile){
+    if (!validateFile(pendingFile)) {
+      pendingFile = null;
+      return;
+    }
+    const formData = new FormData();
+    formData.append('file', pendingFile);
+    addChatMessage("我：" + `📄 ${pendingFile.name}`);
+    upload_file(formData);
+    pendingFile = null;
+    return;
+  }else{
+    if(uploadMode){
+      upload_text(message);
+      addChatMessage("我：" + message);
+      document.getElementById("message").value = "";
+    }else{
+      addChatMessage("我：" + message);
+      fetch('/human', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+        text: message,
+        type: 'echo',
+        interrupt: true,
+        sessionid: parseInt(document.getElementById('sessionid').value || "0")
+      })
+    });
+  } 
+}
   document.getElementById("message").value = "";
 });
 
@@ -189,23 +219,119 @@ function enablePressToTalk(buttonId, onResult) {
       btn.textContent = '⏹';
     }
   });
-
   btn.addEventListener('touchend', () => {
     if (isRecording) recognition.stop();
   });
 }
-
+document.getElementById("upload_button").addEventListener("click", () => {
+  document.getElementById("fileInput").click();
+});
+function sendTextToAI(text) {
+  fetch('/human', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      text: text,
+      type: 'echo',
+      interrupt: true,
+      sessionid: parseInt(document.getElementById('sessionid').value || "0")
+    })
+  });
+}
+function upload_file(data){
+  fetch('/api/upload_file', {
+    method: 'POST',
+    body: data
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // 上传成功，叫数字人说话
+      sendTextToAI("文件上传成功！");
+    } else {
+      // 上传失败，叫数字人说话
+      // sendTextToAI("文件上传失败！");
+    }
+  })
+  .catch(error => {
+    console.error('上传出错:', error);
+    // sendTextToAI("文件上传失败！");
+  });
+}
+function upload_text(text){
+  fetch('/api/upload_text', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      text: text,
+      sessionid: parseInt(document.getElementById('sessionid').value || "0")
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // 上传成功，叫数字人说话
+      sendTextToAI("题目上传成功！");
+    } else {
+      // 上传失败，叫数字人说话
+      // sendTextToAI("文件上传失败！");
+    }
+  })
+  .catch(error => {
+    console.error('上传出错:', error);
+    // sendTextToAI("文件上传失败！");
+  });
+}
+function handleFileSelected() {
+  const fileInput = document.getElementById("fileInput");
+  const file = fileInput.files[0];
+  if (file) {
+    if (!validateFile(file)) {
+      return; 
+    }
+    const fileName = file.name;
+    addChatMessage("我：" + `📄 ${fileName}`);
+    // TODO
+    // 新增上传逻辑
+    const formData = new FormData();
+    formData.append('file', file)
+    upload_file(formData);
+  }
+}
 enablePressToTalk('voice_button', function (text) {
   document.getElementById("message").value = text;
   document.getElementById("send_button").click();
 });
 
 window.addEventListener("DOMContentLoaded", async () => {
-  await loadUserProfile();
-
+  await loadUserProfile()
   const shouldAutoStart = localStorage.getItem("autoStart") === "true";
   if (shouldAutoStart) {
     localStorage.removeItem("autoStart");
     start();
+    setTimeout(() => {
+      sendTextToAI("hello"); 
+    }, 1000);
   }
+});
+
+let pendingFile = null;
+let uploadMode = false; 
+document.getElementById("message").addEventListener("paste", function(event) {
+  const items = event.clipboardData?.items;
+  if (!items) return;
+  for (let item of items) {
+    if (item.type.indexOf("image") !== -1) {
+      const file = item.getAsFile();
+      if (file) {
+        pendingFile = file;  // 保存到临时变量
+        document.getElementById("message").value = `📄 ${file.name}`;  // 把文件名显示到输入框
+      }
+    }
+  }
+});
+document.getElementById("toggleUploadMode").addEventListener("click", () => {
+  uploadMode = !uploadMode;
+  const btn = document.getElementById("toggleUploadMode");
+  btn.textContent = uploadMode ? "✅" : "📝";
 });

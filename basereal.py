@@ -50,7 +50,7 @@ def read_imgs(img_list):
 def log_ws_send_result(future):
     try:
         result = future.result()
-        logger.info(f"[✅ WebSocket] Send completed → {result}")
+        # logger.info(f"[✅ WebSocket] Send completed → {result}")
     except Exception as e:
         logger.warning(f"[⚠️ WebSocket] Send failed: {e}")
 class BaseReal:
@@ -103,7 +103,7 @@ class BaseReal:
         if safe_event:
             status = safe_event.get('status')
             sessionid = safe_event.get('sessionid')
-            logger.info(f"[put_audio_frame] status={status}, sessionid={sessionid}, eventpoint={eventpoint}")
+            # logger.info(f"[put_audio_frame] status={status}, sessionid={sessionid}, eventpoint={eventpoint}")
             if sessionid is not None:
                 ws = nerfreals_ws_map.get(sessionid)
                 # logger.info(f"[ws] Event: {ws}")
@@ -112,7 +112,7 @@ class BaseReal:
                     loop = self.main_loop
                     if status == "streaming":
                         gpt_text = safe_event.get("char")
-                        logger.info(f"[safe_event] getting char → {gpt_text}")
+                        # logger.info(f"[safe_event] getting char → {gpt_text}")
                         if gpt_text:
                             # logger.info(f"[WebSocket] Sending gpt_stream → {gpt_text}")
                             # logger.warning(f"[Loop DEBUG] main_loop = {self.main_loop}, is_running = {self.main_loop.is_running()}")

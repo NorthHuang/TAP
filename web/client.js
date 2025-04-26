@@ -27,7 +27,7 @@ function setupWebSocket(sessionid) {
   ws.onclose = () => console.log("WebSocket closed");
 
   ws.onmessage = function (event) {
-    console.log("[WebSocket] Message received:", event.data);
+    // console.log("[WebSocket] Message received:", event.data);
     const data = JSON.parse(event.data);
     if (data.type === "gpt_stream") {
       addGptChatBubble(data.text);
