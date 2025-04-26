@@ -48,7 +48,7 @@ async def upload_file(request):
     except Exception as e:
         return web.json_response({"success": False, "message": f"Failed to save file: {str(e)}"})
 
-    # 🔥 新逻辑：本地提取文本
+    # 新逻辑：本地提取文本
     try:
         extracted_data = await extract_text_and_parse(save_path)
         print("🧹 本地提取到内容：", extracted_data)
@@ -66,8 +66,7 @@ async def extract_text_and_parse(filepath):
         text = extract_text_from_pdf(filepath)
         return parse_questions_pdf(text)
     elif ext == ".csv":
-        text = extract_text_from_csv(filepath)
-        return parse_questions_csv(text)
+        return parse_questions_csv(filepath)
     elif ext in [".png", ".jpg", ".jpeg"]:
         text = extract_text_from_image(filepath)
         return parse_questions_image(text)
@@ -185,12 +184,24 @@ def parse_questions_csv(file_path):
 
     for _, row in df.iterrows():
         description = row.get("description") or row.get("题目") or ""
-        options = []
-        for option_letter in ["A", "B", "C", "D"]:
-            option_text = row.get(option_letter)
-            if option_text:
-                options.append(f"{option_letter}. {option_text}")
         answer = (row.get("answer") or row.get("正确答案") or "").strip().upper()
+
+        options = []
+
+        if all(col in row for col in ["A", "B", "C", "D"]):
+            # 如果A/B/C/D独立列存在
+            for option_letter in ["A", "B", "C", "D"]:
+                option_text = row.get(option_letter)
+                if pd.notna(option_text) and str(option_text).strip():
+                    options.append(f"{option_letter}. {option_text.strip()}")
+        elif "options" in row and pd.notna(row["options"]):
+            # 如果只有整体 options 字段（json数组）
+            try:
+                loaded_options = json.loads(row["options"])
+                if isinstance(loaded_options, list):
+                    options = loaded_options
+            except Exception as e:
+                print(f"options字段解析失败：{e}")
 
         if description and options:
             questions.append({
