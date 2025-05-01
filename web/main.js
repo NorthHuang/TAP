@@ -170,6 +170,7 @@ document.getElementById("send_button").addEventListener("click", function () {
     addChatMessage("我：" + `📄 ${pendingFile.name}`);
     upload_file(formData);
     pendingFile = null;
+    document.getElementById("message").value = "";
     return;
   }else{
     if(uploadMode){
