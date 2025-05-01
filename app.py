@@ -46,7 +46,7 @@ import torch
 from typing import Dict
 from logger import logger
 from global_data import nerfreals_ws_map
-from db import register, login, generate_questions, init_db, get_questions
+from db import register, login, generate_questions, init_db, get_questions, update_question, delete_question
 from user_profile import logout, get_profile, update_profile
 from session_setup import setup_sessions
 from upload import upload_file, upload_text
@@ -496,6 +496,8 @@ if __name__ == '__main__':
     appasync.router.add_get("/api/get_questions", get_questions)
     appasync.router.add_post("/api/upload_file", upload_file)
     appasync.router.add_post("/api/upload_text", upload_text)
+    appasync.router.add_post("/api/update_question", update_question)
+    appasync.router.add_post("/api/delete_question", delete_question)
     # Configure default CORS settings.
     cors = aiohttp_cors.setup(appasync, defaults={
             "*": aiohttp_cors.ResourceOptions(

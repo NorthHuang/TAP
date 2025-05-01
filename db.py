@@ -184,3 +184,50 @@ async def get_questions(request):
     except Exception as e:
         print("[get_questions ERROR]", e) 
         return web.json_response({"message": f"Failed to get questions: {e}"}, status=500)
+
+async def update_question(request):
+    try:
+        data = await request.json()
+        question_id = data.get("question_id")
+        description = data.get("description", "").strip()
+        answer = data.get("answer", "").strip()
+        options = data.get("options", [])
+
+        if not all([question_id, description, answer, options]):
+            return web.json_response({"success": False, "message": "字段不能为空"}, status=400)
+
+        conn = get_connection()
+        with conn.cursor() as cursor:
+            sql = """
+                UPDATE questions
+                SET description = %s,
+                    answer = %s,
+                    options = %s
+                WHERE question_id = %s
+            """
+            cursor.execute(sql, (description, answer, json.dumps(options), question_id))
+            conn.commit()
+        conn.close()
+
+        return web.json_response({"success": True, "message": "更新成功"})
+    except Exception as e:
+        print("[update_question ERROR]", e)
+        return web.json_response({"success": False, "message": f"服务器错误: {e}"}, status=500)
+async def delete_question(request):
+    try:
+        data = await request.json()
+        question_id = data.get("question_id")
+
+        if not question_id:
+            return web.json_response({"success": False, "message": "缺少题目ID"}, status=400)
+
+        conn = get_connection()
+        with conn.cursor() as cursor:
+            cursor.execute("DELETE FROM questions WHERE question_id = %s", (question_id,))
+            conn.commit()
+        conn.close()
+
+        return web.json_response({"success": True, "message": "删除成功"})
+    except Exception as e:
+        print("[delete_question ERROR]", e)
+        return web.json_response({"success": False, "message": f"删除失败: {e}"}, status=500)

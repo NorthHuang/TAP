@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <title>闯关答题</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 40px;
+      text-align: center;
+    }
+    #question {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+    .option-btn {
+      display: block;
+      width: 300px;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+    .option-btn:active {
+      transform: scale(0.98);
+    }
+    .wrong {
+      animation: shake 0.3s;
+      background-color: #dc3545 !important;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div id="question">加载中...</div>
+  <div id="options"></div>
+
+  <script src="quiz_game.js"></script>
+</body>
+</html>

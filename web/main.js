@@ -63,7 +63,12 @@ function editField(field) {
   span.appendChild(input);
   input.focus();
 }
-
+function openQuestion(){
+  window.open("/question_editor.html", "_blank");
+}
+function quizQuestion(){
+  openIframePage("/quiz_game.html");
+}
 function saveProfile() {
   const name = document.getElementById("name").textContent;
   const gender = document.getElementById("gender").textContent;
@@ -99,7 +104,27 @@ function logout() {
     window.location.href = 'index.html';
   });
 }
+function loadQuizInterface() {
+  const wrapper = document.getElementById("gameFrameWrapper");
+  const chat = document.getElementById("chat-log");
 
+  // 清空原本的 iframe（防止和游戏冲突）
+  wrapper.innerHTML = "";
+
+  // 创建做题 iframe
+  const iframe = document.createElement("iframe");
+  iframe.id = "quizFrame";
+  iframe.src = "/quiz_game.html"; // 指向你刚写的答题页面
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "none";
+
+  wrapper.appendChild(iframe);
+  wrapper.style.display = "block";
+
+  if (chat) chat.style.display = "none";
+}
+window.loadQuizInterface = loadQuizInterface;
 function toggleGame() {
   const wrapper = document.getElementById("gameFrameWrapper");
   const btn = document.getElementById("toggleGameBtn");
