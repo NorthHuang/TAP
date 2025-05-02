@@ -1,142 +1,244 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 100px; }
-        .container { max-width: 400px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
-        .form-group { margin-bottom: 15px; text-align: left; }
-        .form-group label { display: block; margin-bottom: 5px; }
-        .form-group input, .form-group select {
-            width: 100%; padding: 8px; box-sizing: border-box;
-        }
-        #register-fields { display: none; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2 id="form-title">Login</h2>
-
-        <div id="form">
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" id="username">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="password">
-            </div>
-
-            <div id="register-fields">
-                <div class="form-group">
-                    <label>Confirm password</label>
-                    <input type="password" id="confirm-password">
-                </div>
-                <div class="form-group">
-                    <label>name</label>
-                    <input type="text" id="name">
-                </div>
-                <div class="form-group">
-                    <label>Role</label>
-                    <select id="role" onchange="toggleStudentFields()">
-                        <option value="student">Student</option>
-                        <option value="teacher">Teacher</option>
-                    </select>
-                </div>
-                <div id="student-extra">
-                    <div class="form-group">
-                        <label>Gender</label>
-                        <select id="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Age</label>
-                        <input type="number" id="age">
-                    </div>
-                    <div class="form-group">
-                        <label>Level</label>
-                        <select id="level">
-                            <option value="primary">Primary School</option>
-                            <option value="middle">Middle School</option>
-                            <option value="high">High School</option>
-                            <option value="university">University</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button onclick="submitForm()">Submit</button>
-            <br><br>
-            <a href="#" onclick="toggleMode()" id="toggle-link">Register</a>
-        </div>
-    </div>
-
-    <script>
-        let isRegisterMode = false;
-
-        function toggleMode() {
-            isRegisterMode = !isRegisterMode;
-            document.getElementById('register-fields').style.display = isRegisterMode ? 'block' : 'none';
-            document.getElementById('form-title').textContent = isRegisterMode ? 'Register' : 'Login';
-            document.getElementById('toggle-link').textContent = isRegisterMode ? 'Back to Login' : 'Register';
-        }
-
-        function toggleStudentFields() {
-            const role = document.getElementById('role').value;
-            document.getElementById('student-extra').style.display = role === 'student' ? 'block' : 'none';
-        }
-
-        async function submitForm() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (isRegisterMode) {
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const name = document.getElementById('name').value;
-            const role = document.getElementById('role').value;
-
-            const payload = {
-                username,
-                password,
-                confirm_password: confirmPassword,
-                name,
-                role
-            };
-
-            if (role === 'student') {
-                payload.gender = document.getElementById('gender').value;
-                payload.age = parseInt(document.getElementById('age').value);
-                payload.level = document.getElementById('level').value;
-            }
-
-            const res = await fetch('/api/register', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(payload)
-            });
-
-            const result = await res.json();
-            alert(result.message);
-            if (result.success) toggleMode(); 
-        } else {
-            const payload = { username, password };
-            const res = await fetch('/api/login', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(payload)
-            });
-
-            const result = await res.json();
-            if (result.success) {
-                localStorage.setItem("autoStart", "true");
-                window.location.href = "https://swintapai.com/webrtcapi.html";
-            }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduLogin</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
 
-    </script>
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      color: #fff;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 15px;
+      backdrop-filter: blur(5px);
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .form-group i {
+      position: absolute;
+      top: 40px;
+      left: 12px;
+      color: #ddd;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00c9ff, #92fe9d);
+      color: #000;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    #register-fields {
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    #toggle-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #e3f2fd;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    ::placeholder {
+      color: #e0e0e0;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+    <h2 id="form-title">Login</h2>
+    <div class="form-group">
+      <label>Username</label>
+      <i class="fa fa-user"></i>
+      <input type="text" id="username" placeholder="Enter username" />
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <i class="fa fa-lock"></i>
+      <input type="password" id="password" placeholder="Enter password" />
+    </div>
+
+    <div id="register-fields">
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <i class="fa fa-check"></i>
+        <input type="password" id="confirm-password" />
+      </div>
+      <div class="form-group">
+        <label>Full Name</label>
+        <i class="fa fa-id-card"></i>
+        <input type="text" id="name" />
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <i class="fa fa-user-graduate"></i>
+        <select id="role" onchange="toggleStudentFields()">
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+        </select>
+      </div>
+      <div id="student-extra">
+        <div class="form-group">
+          <label>Gender</label>
+          <i class="fa fa-venus-mars"></i>
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Age</label>
+          <i class="fa fa-hourglass-half"></i>
+          <input type="number" id="age" />
+        </div>
+        <div class="form-group">
+          <label>Level</label>
+          <i class="fa fa-school"></i>
+          <select id="level">
+            <option value="primary">Primary School</option>
+            <option value="middle">Middle School</option>
+            <option value="high">High School</option>
+            <option value="university">University</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button onclick="submitForm()">Submit</button>
+    <a id="toggle-link" onclick="toggleMode()">Don't have an account? Register</a>
+  </div>
+
+  <script>
+    let isRegisterMode = false;
+
+    function toggleMode() {
+      isRegisterMode = !isRegisterMode;
+      document.getElementById('register-fields').style.display = isRegisterMode ? 'block' : 'none';
+      document.getElementById('form-title').textContent = isRegisterMode ? 'Register' : 'Login';
+      document.getElementById('toggle-link').textContent = isRegisterMode ? 'Back to Login' : 'Don\'t have an account? Register';
+    }
+
+    function toggleStudentFields() {
+      const role = document.getElementById('role').value;
+      document.getElementById('student-extra').style.display = role === 'student' ? 'block' : 'none';
+    }
+
+    async function submitForm() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (isRegisterMode) {
+        const confirmPassword = document.getElementById('confirm-password').value;
+        const name = document.getElementById('name').value;
+        const role = document.getElementById('role').value;
+
+        const payload = {
+          username,
+          password,
+          confirm_password: confirmPassword,
+          name,
+          role
+        };
+
+        if (role === 'student') {
+          payload.gender = document.getElementById('gender').value;
+          payload.age = parseInt(document.getElementById('age').value);
+          payload.level = document.getElementById('level').value;
+        }
+
+        const res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+        alert(result.message);
+        if (result.success) toggleMode();
+      } else {
+        const payload = { username, password };
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+        if (result.success) {
+          localStorage.setItem("autoStart", "true");
+          window.location.href = "https://swintapai.com/webrtcapi.html";
+        } else {
+          alert(result.message || "Login failed");
+        }
+      }
+    }
+  </script>
 </body>
 </html>
