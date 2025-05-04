@@ -26,18 +26,19 @@ function showQuestion() {
     btn.textContent = `${text}`;
     btn.onclick = () => {
       if (label === q.answer) {
-        btn.style.backgroundColor = "#28a745"; // 绿色表示正确
-        btn.disabled = true;
-    
-        // 禁用所有其他按钮
-        document.querySelectorAll(".option-btn").forEach(b => b.disabled = true);
+        document.querySelectorAll(".option-btn").forEach(b => {
+          if (b !== btn) {
+            b.style.pointerEvents = "none";
+            b.style.opacity = "0.6";
+          }
+        });
     
         setTimeout(() => {
           currentIndex++;
           if (currentIndex < questions.length) {
             showQuestion();
           } else {
-            document.getElementById("question").textContent = "恭喜通关！🎉";
+            document.getElementById("question").textContent = "Congratulation！🎉";
             container.innerHTML = "";
           }
         }, 1000); // 延迟 1 秒跳转

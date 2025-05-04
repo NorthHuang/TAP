@@ -2,36 +2,63 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8" />
-  <title>闯关答题</title>
+  <title>Quiz</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-      padding: 40px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+      padding: 40px 20px;
+      margin: 0;
       text-align: center;
+      min-height: 100vh;
+      box-sizing: border-box;
     }
+
     #question {
       font-size: 24px;
       margin-bottom: 30px;
+      font-weight: bold;
+      color: #333;
+      background-color: #ffffffdd;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
+
+    #options {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
     .option-btn {
       display: block;
-      width: 300px;
-      margin: 10px auto;
-      padding: 12px;
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px 20px;
       font-size: 18px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
-      background-color: #007bff;
+      background: linear-gradient(135deg, #42a5f5, #1e88e5);
       color: white;
+      transition: background 0.3s, transform 0.1s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
+    .option-btn:hover {
+      background: linear-gradient(135deg, #64b5f6, #2196f3);
+    }
+
     .option-btn:active {
       transform: scale(0.98);
     }
+
     .wrong {
       animation: shake 0.3s;
-      background-color: #dc3545 !important;
+      background-color: #e53935 !important;
     }
     @keyframes shake {
       0% { transform: translateX(0); }
@@ -43,7 +70,7 @@
   </style>
 </head>
 <body>
-  <div id="question">加载中...</div>
+  <div id="question">Loading...</div>
   <div id="options"></div>
 
   <script src="quiz_game.js"></script>

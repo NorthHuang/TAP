@@ -41,6 +41,13 @@ function setupWebSocket(sessionid) {
             window.toggleGame();
           }
         }, 3000);
+      }else if(data.start_quiz){
+        setTimeout(() => {
+          console.log("✅ 现在启动答题！");
+          if (typeof window.loadQuizInterface === "function") {
+            window.loadQuizInterface();
+          }
+        }, 3000);
       }
     }
   };

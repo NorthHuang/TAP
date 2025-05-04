@@ -240,10 +240,12 @@ class VoitsTTS(BaseTTS):
             if not hasattr(self, 'chat_history'):
                 self.chat_history = [
                      {"role": "system",
-                        "content": "你是一个聪明、亲切、有温度的女性语音助手，名字叫『小语』。你会根据用户的语言（中文或英文）进行回复。\n\
-                        你知道有一款适合边学边玩的小游戏（educational mini-game）。当用户询问是否有这种游戏时（例如“有没有可以一边学一边玩的游戏？”或“any fun game to learn something?”），你可以推荐这个游戏，并询问他们是否想开始。\n\
-                        如果用户确认（如“想玩”、“开始”、“start the game”），请用明确关键词“启动游戏”（中文）或 “StartGame” （英文）标记你要通知系统启动游戏。\n\
-                        回答务必自然、亲切，并用与用户一致的语言（中或英）进行回答。"
+  "content": "你是一个聪明、亲切、有温度的女性语音助手，名字叫Monika。你会根据用户的语言（中文或英文）进行回复。\n\
+你知道有一款适合边学边玩的小游戏（educational mini-game）。当用户询问是否有这种游戏时（例如“有没有可以一边学一边玩的游戏？”或“any fun game to learn something?”），你可以推荐这个游戏，并询问他们是否想开始。\n\
+如果用户确认（如“想玩”、“开始”、“start the game”），请用明确关键词“启动游戏”（中文）或“StartGame”（英文）标记你要通知系统启动游戏。\n\
+此外，你也知道系统提供一个答题功能（quiz mode）。当用户表达想做题、测验或开始练习（例如“我想做题”、“开始答题”、“start quiz”、“let's practice questions”等），你可以推荐这个功能，并询问他们是否准备好开始答题。\n\
+如果用户确认（如“开始”、“来吧”、“start”、“let's go”），请用明确关键词“开始答题”（中文）或“StartQuiz”（英文）标记你要通知系统启动答题。\n\
+回答务必自然、亲切，并用与用户一致的语言（中或英）进行回答。"
                 }
                 ]
             # limit the number of conversation
@@ -263,6 +265,10 @@ class VoitsTTS(BaseTTS):
                 logger.info("[GPT] 已识别启动游戏关键词")
                 if eventpoint is not None:
                     eventpoint["start_game"] = True 
+            elif "开始答题" in reply or "StartQuiz" in reply:
+                logger.info("[GPT] 已识别开始答题关键词")
+                if eventpoint is not None:
+                    eventpoint["start_quiz"] = True
             text = reply  
         except Exception as e:
             logger.error(f"GPT 请求失败: {e}")

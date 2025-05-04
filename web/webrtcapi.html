@@ -1,62 +1,69 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=720, user-scalable=no">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=720, user-scalable=no" />
   <title>WebRTC Digital Human</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="main-wrapper">
-    <button class="toggle-sidebar" onclick="toggleSidebar()">≡</button>
-    <div id="sidebar" class="sidebar hidden">
-      <h3>User Profile</h3>
-      <div class="profile-item">Name: <span id="name" onclick="editField('name')">(Click to edit)</span></div>
-      <div class="profile-item">Gender: <span id="gender" onclick="editField('gender')">(Click to edit)</span></div>
-      <div class="profile-item">Age: <span id="age" onclick="editField('age')">(Click to edit)</span></div>
-      <div class="profile-item">Level:
-        <select id="level">
-          <option value="primary">Primary School</option>
-          <option value="middle">Middle School</option>
-          <option value="high">High School</option>
-          <option value="university">University</option>
-        </select>
+  <!-- <div id="main-wrapper"> -->
+    <!-- 左侧区域：Quiz/Game -->
+      <div class="left-panel-inner">
+        <div id="quiz-game-container">
+        </div>
       </div>
-      <button onclick="openQuestion()">Questions</button>
-      <button onclick="loadQuizInterface()">QuizQuestion</button>
-      <button onclick="saveProfile()">Save</button>
-      <button onclick="logout()" style="margin-top: 10px; background-color: #dc3545; color: white;">Logout</button>
+      <!-- <div class="quiz-buttons">
+        <button id="toggleGameBtn" onclick="toggleGame()">🎮 Game</button>
+        <button onclick="loadQuizInterface()">❓ Quiz</button>
+      </div> -->
+    <!-- </div>   -->
+
+    <!-- 右侧区域：数字人内容 -->
+    <div id="right-panel">
+      <button class="toggle-sidebar" onclick="toggleSidebar()">≡</button>
+      <div id="sidebar" class="sidebar hidden">
+        <h3>User Profile</h3>
+        <div class="profile-item">Name: <span id="name" onclick="editField('name')">(Click to edit)</span></div>
+        <div class="profile-item">Gender: <span id="gender" onclick="editField('gender')">(Click to edit)</span></div>
+        <div class="profile-item">Age: <span id="age" onclick="editField('age')">(Click to edit)</span></div>
+        <div class="profile-item">Level:
+          <select id="level">
+            <option value="primary">Primary School</option>
+            <option value="middle">Middle School</option>
+            <option value="high">High School</option>
+            <option value="university">University</option>
+          </select>
+        </div>
+        <button onclick="openQuestion()">Questions</button>
+        <button onclick="loadQuizInterface()">QuizQuestion</button>
+        <button onclick="saveProfile()">Save</button>
+        <button onclick="logout()" style="margin-top: 10px; background-color: #dc3545; color: white;">Logout</button>
+      </div>
+
+      <div class="container">
+        <div class="video-container">
+          <video id="video" autoplay playsinline></video>
+        </div>
+        
+        <div class="bottom-panel">
+          <button id="voice_button">🎤</button>
+          <button id="upload_button">📎</button>
+          <button id="toggleUploadMode" style="margin-left: 5px;">📝</button>
+          <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelected()" />
+          <input type="text" id="message" placeholder="请输入内容..." />
+          <button id="send_button">发送</button>
+        </div>
+        <div id="chat-log" class="chat-bottom"></div>
+        <input type="hidden" id="sessionid" value="0" />
+      </div>
     </div>
 
-    <div class="container">
-      <!-- <div class="option">
-        <input id="use-stun" type="checkbox" />
-        <label for="use-stun">Use STUN server</label>
-      </div> -->
-      <!-- <div class="control-panel">
-        <button id="start" onclick="start()">启动数字人</button>
-      </div> -->
-      <div class="video-container">
-        <video id="video" autoplay playsinline></video>
-      </div>
-      <div class="bottom-panel">
-        <button id="voice_button">🎤</button>
-        <button id="upload_button">📎</button>
-        <button id="toggleUploadMode" style="margin-left: 5px;">📝</button>
-        <input type="file" id="fileInput" style="display:none;" onchange="handleFileSelected()">
-        <input type="text" id="message" placeholder="请输入内容..." />
-        <button id="send_button">发送</button>
-      </div>
-      <input type="hidden" id="sessionid" value="0">
-    </div>
 
-    <div id="gameFrameWrapper"></div>
-  </div>
-  <div id="chat-log" class="chat-bottom"></div>
-  <button id="toggleGameBtn" onclick="toggleGame()" style="position: absolute; bottom: 30px">
-    启动游戏
-  </button>
-  <button id="generate-questions" style="position: absolute; bottom: 10px">Generate Question</button>
+<!--  
+  <button id="toggleGameBtn" onclick="toggleGame()" style="position: absolute; bottom: 30px">启动游戏</button>
+  <button id="generate-questions" style="position: absolute; bottom: 10px">Generate Question</button> -->
+
   <script src="client.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="main.js"></script>

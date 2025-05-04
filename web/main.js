@@ -29,14 +29,6 @@ async function loadUserProfile() {
     console.error("Error loading user profile:", err);
   }
   
-  document.getElementById("generate-questions").addEventListener("click", () => {
-    fetch("/api/generate_questions", {
-        method: "POST"
-    })
-    .then(res => res.json())
-    .then(data => alert(data.message))
-    .catch(err => alert("Error generating questions"));
-});
 }
 
 function toggleSidebar() {
@@ -105,7 +97,7 @@ function logout() {
   });
 }
 function loadQuizInterface() {
-  const wrapper = document.getElementById("gameFrameWrapper");
+  const wrapper = document.getElementById("quiz-game-container");
   const chat = document.getElementById("chat-log");
 
   // 清空原本的 iframe（防止和游戏冲突）
@@ -122,14 +114,15 @@ function loadQuizInterface() {
   wrapper.appendChild(iframe);
   wrapper.style.display = "block";
 
-  if (chat) chat.style.display = "none";
+  // if (chat) chat.style.display = "none";
 }
 window.loadQuizInterface = loadQuizInterface;
 function toggleGame() {
-  const wrapper = document.getElementById("gameFrameWrapper");
-  const btn = document.getElementById("toggleGameBtn");
+  const wrapper = document.getElementById("quiz-game-container");
   const chat = document.getElementById("chat-log");
-  if (!wrapper.hasChildNodes()) {
+  const gameFrame = document.getElementById("gameFrame");
+  if (!gameFrame) {
+    wrapper.innerHTML = "";
     const iframe = document.createElement("iframe");
     iframe.id = "gameFrame";
     iframe.src = "/static/QT/index.html";
@@ -139,13 +132,13 @@ function toggleGame() {
     wrapper.appendChild(iframe);
 
     wrapper.style.display = "block";
-    btn.textContent = "关闭游戏";
-    if (chat) chat.style.display = "none";
+    // btn.textContent = "关闭游戏";
+    // if (chat) chat.style.display = "none";
   } else {
     wrapper.innerHTML = "";
     wrapper.style.display = "none";
-    btn.textContent = "启动游戏";
-    if (chat) chat.style.display = "flex";
+    // btn.textContent = "启动游戏";
+    // if (chat) chat.style.display = "flex";
   }
 }
 window.toggleGame = toggleGame;

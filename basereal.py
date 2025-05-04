@@ -130,6 +130,9 @@ class BaseReal:
                         if safe_event.get("start_game"):
                             logger.info("[🛰️ WebSocket] Detected start_game=True, adding to message")
                             message["start_game"] = True
+                        if safe_event.get("start_quiz"):
+                            logger.info("[🛰️ WebSocket] Detected start_quiz=True, adding to message")
+                            message["start_quiz"] = True
                         asyncio.run_coroutine_threadsafe(
                             ws.send_str(json.dumps(message)),
                             loop
