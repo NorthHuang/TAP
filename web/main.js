@@ -17,11 +17,25 @@ async function loadUserProfile() {
     const res = await fetch("/api/get_profile");
     const data = await res.json();
     if (data.success) {
-      document.getElementById("name").textContent = data.profile.name || "(Click to edit)";
-      document.getElementById("gender").textContent = data.profile.gender || "(Click to edit)";
-      document.getElementById("age").textContent = data.profile.age || "(Click to edit)";
-      document.getElementById("level").value = data.profile.level || "primary";
-      document.getElementById("sidebar").classList.remove("hidden");
+      if(data.profile.role){
+        if(data.profile.role=="student"){
+          document.getElementById("name").textContent = data.profile.name || "(Click to edit)";
+          document.getElementById("gender").textContent = data.profile.gender || "(Click to edit)";
+          document.getElementById("age").textContent = data.profile.age || "(Click to edit)";
+          document.getElementById("level").value = data.profile.level || "primary";
+          document.getElementById("sidebar").classList.remove("hidden");
+          document.getElementById("questionButton").style.display = "none";
+          document.getElementById("quizButton").style.display = "none";
+          document.getElementById("upload_button").style.display = "none";
+          document.getElementById("toggleUploadMode").style.display = "none";
+        }else if(data.profile.role=="teacher"){
+          document.getElementById("gender").parentNode.style.display = "none";
+          document.getElementById("age").parentNode.style.display = "none";
+          document.getElementById("level").parentNode.style.display = "none";
+          document.getElementById("name").textContent = data.profile.name || "(Click to edit)";
+          document.getElementById("sidebar").classList.remove("hidden");
+        }
+      }
     } else {
       console.warn("Not logged in or failed to fetch profile.");
     }
@@ -118,25 +132,24 @@ function loadQuizInterface() {
 }
 window.loadQuizInterface = loadQuizInterface;
 function toggleGame() {
-  const wrapper = document.getElementById("quiz-game-container");
+  const container = document.getElementById("game-container");
   const chat = document.getElementById("chat-log");
   const gameFrame = document.getElementById("gameFrame");
   if (!gameFrame) {
-    wrapper.innerHTML = "";
+    container.innerHTML = "";
     const iframe = document.createElement("iframe");
     iframe.id = "gameFrame";
     iframe.src = "/static/QT/index.html";
     iframe.style.width = "100%";
     iframe.style.height = "100%";
     iframe.style.border = "none";
-    wrapper.appendChild(iframe);
-
-    wrapper.style.display = "block";
+    container.appendChild(iframe);
+    container.style.display = "block";
     // btn.textContent = "关闭游戏";
     // if (chat) chat.style.display = "none";
   } else {
-    wrapper.innerHTML = "";
-    wrapper.style.display = "none";
+    container.innerHTML = "";
+    container.style.display = "none";
     // btn.textContent = "启动游戏";
     // if (chat) chat.style.display = "flex";
   }
