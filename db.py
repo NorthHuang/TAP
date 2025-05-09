@@ -49,9 +49,9 @@ async def register(request):
                 cursor.execute(sql2, (user_id, gender, age, level, unlocked_backgrounds, unlocked_fish_skins))
 
         conn.commit()
-        return web.json_response({"success": True, "message": "注册成功"})
+        return web.json_response({"success": True, "message": "Register Success!"})
     except Exception as e:
-        return web.json_response({"success": False, "message": f"注册失败: {str(e)}"})
+        return web.json_response({"success": False, "message": f"Register Fail!: {str(e)}"})
     finally:
         conn.close()
 

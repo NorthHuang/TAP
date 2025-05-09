@@ -112,31 +112,25 @@ function logout() {
 }
 function loadQuizInterface() {
   const wrapper = document.getElementById("quiz-game-container");
-  const chat = document.getElementById("chat-log");
-
-  // 清空原本的 iframe（防止和游戏冲突）
-  wrapper.innerHTML = "";
-
-  // 创建做题 iframe
+  const quizFrame = document.getElementById("quizFrame");
+  if(!quizFrame){
+    // 创建做题 iframe
   const iframe = document.createElement("iframe");
   iframe.id = "quizFrame";
-  iframe.src = "/quiz_game.html"; // 指向你刚写的答题页面
+  iframe.src = "/quiz_game.html"; 
   iframe.style.width = "100%";
   iframe.style.height = "100%";
   iframe.style.border = "none";
-
   wrapper.appendChild(iframe);
   wrapper.style.display = "block";
-
-  // if (chat) chat.style.display = "none";
+  document.getElementById("closeQuizBtn").style.opacity=255;
+  }
 }
 window.loadQuizInterface = loadQuizInterface;
 function toggleGame() {
   const container = document.getElementById("game-container");
-  const chat = document.getElementById("chat-log");
   const gameFrame = document.getElementById("gameFrame");
   if (!gameFrame) {
-    container.innerHTML = "";
     const iframe = document.createElement("iframe");
     iframe.id = "gameFrame";
     iframe.src = "/static/QT/index.html";
@@ -145,6 +139,7 @@ function toggleGame() {
     iframe.style.border = "none";
     container.appendChild(iframe);
     container.style.display = "block";
+    document.getElementById("closeGameBtn").style.opacity=255;
     // btn.textContent = "关闭游戏";
     // if (chat) chat.style.display = "none";
   } else {
@@ -162,7 +157,23 @@ function addChatMessage(text) {
   div.textContent = text;
   chat.prepend(div);
 }
+document.getElementById("closeQuizBtn").addEventListener("click", () => {
+  const wrapper = document.getElementById("quiz-game-container");
+  const quizFrame = document.getElementById("quizFrame");
+  if (quizFrame) {
+    wrapper.removeChild(quizFrame); 
+    document.getElementById("closeQuizBtn").style.opacity=0;
+  }
+});
 
+document.getElementById("closeGameBtn").addEventListener("click", () => {
+  const wrapper = document.getElementById("game-container");
+  const gameFrame = document.getElementById("gameFrame");
+  if (gameFrame) {
+    wrapper.removeChild(gameFrame);
+    document.getElementById("closeGameBtn").style.opacity=0;
+  }
+});
 document.getElementById("send_button").addEventListener("click", function () {
   const message = document.getElementById("message").value.trim();
   if (!message) return;
