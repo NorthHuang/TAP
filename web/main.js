@@ -184,7 +184,7 @@ document.getElementById("send_button").addEventListener("click", function () {
     }
     const formData = new FormData();
     formData.append('file', pendingFile);
-    addChatMessage("我：" + `📄 ${pendingFile.name}`);
+    addChatMessage(`📄 ${pendingFile.name}`);
     upload_file(formData);
     pendingFile = null;
     document.getElementById("message").value = "";
@@ -192,10 +192,10 @@ document.getElementById("send_button").addEventListener("click", function () {
   }else{
     if(uploadMode){
       upload_text(message);
-      addChatMessage("我：" + message);
+      addChatMessage(message);
       document.getElementById("message").value = "";
     }else{
-      addChatMessage("我：" + message);
+      addChatMessage(message);
       fetch('/human', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -333,7 +333,7 @@ function handleFileSelected() {
       return; 
     }
     const fileName = file.name;
-    addChatMessage("我：" + `📄 ${fileName}`);
+    addChatMessage(`📄 ${fileName}`);
     // TODO
     // 新增上传逻辑
     const formData = new FormData();
