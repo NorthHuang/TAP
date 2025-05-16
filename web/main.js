@@ -290,7 +290,7 @@ function upload_file(data){
   .then(data => {
     if (data.success) {
       // 上传成功，叫数字人说话
-      sendTextToAI("文件上传成功！");
+      sendTextToAI("File uploaded successfully");
     } else {
       // 上传失败，叫数字人说话
       // sendTextToAI("文件上传失败！");
@@ -314,7 +314,7 @@ function upload_text(text){
   .then(data => {
     if (data.success) {
       // 上传成功，叫数字人说话
-      sendTextToAI("题目上传成功！");
+      sendTextToAI("Question uploaded successfully");
     } else {
       // 上传失败，叫数字人说话
       // sendTextToAI("文件上传失败！");
